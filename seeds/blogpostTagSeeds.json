@@ -1,0 +1,30 @@
+[
+  {
+    "blogpostId": 1,
+    "tagId": 2
+  },
+  {
+    "blogpostId": 1,
+    "tagId": 3
+  },
+  {
+    "blogpostId": 2,
+    "tagId": 4
+  },
+  {
+    "blogpostId": 2,
+    "tagId": 6
+  },
+  {
+    "blogpostId": 2,
+    "tagId": 7
+  },
+  {
+    "blogpostId": 3,
+    "tagId": 1
+  },
+  {
+    "blogpostId": 4,
+    "tagId": 5
+  }
+]
