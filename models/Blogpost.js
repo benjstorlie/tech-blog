@@ -18,11 +18,6 @@ Blogpost.init(
     body: {
       type: DataTypes.TEXT,
     },
-    publish_date: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
     userId: {
       type: DataTypes.INTEGER,
       references: {

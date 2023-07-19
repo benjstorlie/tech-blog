@@ -2,6 +2,9 @@ const User = require('./User');
 const Blogpost = require('./Blogpost');
 const Comment = require('./Comment');
 const Tag = require('./Tag');
+const BlogpostComment = require('./BlogpostComment');
+const BlogpostTag = require('./BlogpostTag');
+
 
 // for One-To-One and One-to-Many relationships, ON DELETE defaults to SET NULL and ON UPDATE defaults to CASCADE.
 
@@ -24,22 +27,22 @@ User.hasMany(Comment, {
 
 // Blogposts belongToMany Comments (through BlogpostComment)
 Blogpost.belongsToMany(Comment, {
-  through: 'BlogpostComment',
+  through: BlogpostComment,
 })
 
 // Comments belongToMany Blogposts (through BlogpostComment)
 Comment.belongsToMany(Blogpost, {
-  through: 'BlogpostComment',
+  through: BlogpostComment,
 })
 
 // Blogposts belongToMany Tags (through BlogpostTag)
 Blogpost.belongsToMany(Tag, {
-  through: 'BlogpostTag',
+  through: BlogpostTag,
 })
 
 // Tags belongToMany Blogposts (through BlogpostTag)
 Tag.belongsToMany(Blogpost, {
-  through: 'BlogpostTag',
+  through: BlogpostTag,
 })
 
-module.exports = { User, Blogpost };
+module.exports = { User, Blogpost, Tag, Comment, BlogpostComment, BlogpostTag };

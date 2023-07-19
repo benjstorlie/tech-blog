@@ -1,20 +1,23 @@
 [
   {
-    "name": "Music Near Me",
-    "description": "A mobile app that will send you notifications whenever a concert is playing in your area.",
-    "publish_date": "2023-07-05T01:20:15.964Z",
-    "userId": "24"
+    "id": 1,
+    "title": "Music Near Me",
+    "body": "A mobile app that will send you notifications whenever a concert is playing in your area.",
+    "createdAt": "2023-07-05T01:20:15.964Z",
+    "userId": "1"
   },
   {
-    "name": "The Ultimate Tech Quiz",
-    "description": "A web app that will give users 10 new technical questions each day and track their progress in things like programming, cybersecurity, database architecture, and more!",
-    "publish_date": "2023-07-05T01:21:12.101Z",
-    "userId": "32"
+    "id": 2,
+    "title": "The Ultimate Tech Quiz",
+    "body": "A web app that will give users 10 new technical questions each day and track their progress in things like programming, cybersecurity, database architecture, and more!",
+    "createdAt": "2023-07-05T01:21:12.101Z",
+    "userId": "2"
   },
   {
-    "name": "Roll 'Em Up",
-    "description": "A game for Windows and macOS where players move a ball through a series of increasingly challenging mazes.",
-    "publish_date": "2023-07-05T01:21:22.806Z",
-    "userId": "18"
+    "id": 3,
+    "title": "Roll 'Em Up",
+    "body": "A game for Windows and macOS where players move a ball through a series of increasingly challenging mazes.",
+    "createdAt": "2023-07-05T01:21:22.806Z",
+    "userId": "4"
   }
 ]
