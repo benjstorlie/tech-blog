@@ -11,28 +11,23 @@ const BlogpostTag = require('./BlogpostTag');
 // Unlike One-To-One and One-To-Many relationships, the defaults for both ON UPDATE and ON DELETE are CASCADE for Many-To-Many relationships
 
 User.hasMany(Blogpost, {
-  foreignKey: 'userId',
   onDelete: 'CASCADE'
 });
 
 Blogpost.belongsTo(User, {
-  foreignKey: 'userId',
-  onDelete: 'CASCADE'
+  foreignKey: 'userId'
 });
 
 User.hasMany(Comment, {
-  foreignKey: 'userId',
-  onDelete: 'CASCADE'
+   onDelete: 'CASCADE'
 });
 
-// Blogposts belongToMany Comments (through BlogpostComment)
-Blogpost.belongsToMany(Comment, {
-  through: BlogpostComment,
+Blogpost.hasMany(Comment, {
+  onDelete: 'CASCADE'
 })
 
-// Comments belongToMany Blogposts (through BlogpostComment)
-Comment.belongsToMany(Blogpost, {
-  through: BlogpostComment,
+Comment.belongsTo(Blogpost, {
+  foreignKey: 'blogpostId',
 })
 
 // Blogposts belongToMany Tags (through BlogpostTag)
@@ -45,4 +40,4 @@ Tag.belongsToMany(Blogpost, {
   through: BlogpostTag,
 })
 
-module.exports = { User, Blogpost, Tag, Comment, BlogpostComment, BlogpostTag };
+module.exports = { User, Blogpost, Tag, Comment, BlogpostTag };
