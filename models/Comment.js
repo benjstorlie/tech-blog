@@ -18,6 +18,13 @@ Comment.init(
     body: {
       type: DataTypes.TEXT,
     },
+    blogpostId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'blogpost',
+        key: 'id',
+      },
+    },
     userId: {
       type: DataTypes.INTEGER,
       references: {
