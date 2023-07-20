@@ -5,7 +5,7 @@ router.post('/', async (req, res) => {
   try {
     const newBlogpost = await Blogpost.create({
       ...req.body,
-      user_id: req.session.user_id,
+      userId: req.session.user_id,
     });
 
     res.status(200).json(newBlogpost);
@@ -13,6 +13,35 @@ router.post('/', async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+router.put('/tags', async (req, res) => {
+  try {
+    const { blogpostId , tagIds } = req.body;
+    const blogpost= await Blogpost.findByPk(blogpostId);
+
+    if (!blogpost) {
+      res
+        .status(404)
+        .json({ message: `No blogpost with id ${blogpostId}` });
+      return;
+    } 
+    const tags = await Tag.findAll({where: {id: tagIds}});
+
+    if (tags.length != tagIds.length) {
+      res
+        .status(404)
+        .json({ message: `Some tag ids were not found.` });
+      return;
+    }
+
+    await blogpost.setTags(tags);
+    blogpost = await blogpost.reload()
+    res.status(200).json(blogpost);
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
 
 router.put('/:id',  async (req, res) => {
   try {
@@ -30,7 +59,7 @@ router.put('/:id',  async (req, res) => {
 
     res.status(200).json("Success.");
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
 });
 
