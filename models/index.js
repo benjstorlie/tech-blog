@@ -40,4 +40,9 @@ Tag.belongsToMany(Blogpost, {
   through: BlogpostTag,
 })
 
+
+
+
+
+
 module.exports = { User, Blogpost, Tag, Comment, BlogpostTag };

@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const Blogpost = require('./Blogpost');
 
 class Comment extends Model {}
 
@@ -39,6 +40,18 @@ Comment.init(
     freezeTableName: true,
     underscored: true,
     modelName: 'comments',
+    hooks: {
+      afterCreate: async (comment, options) => {
+        const blogpostId = comment.blogpostId;
+        const count = await Comment.count({
+          where: { blogpostId: comment.blogpostId}
+        })
+
+      },
+      afterUpdate: async (comment, options) => {
+
+      }
+    }
   }
 );
 
