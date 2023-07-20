@@ -88,4 +88,4 @@ const get = {
 }
 
 
-module.exports = router;
+module.exports = {router, get};
