@@ -39,13 +39,13 @@ Comment.init(
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'comments',
+    modelName: 'comment',
     hooks: {
       afterCreate: async (comment, options) => {
         await Blogpost.increment({commentCount: 1}, {where: {id: comment.blogpostId}});
       },
       afterDestroy: async (comment, options) => {
-        await Blogpost.increment({commentCount: 1}, {where: {id: comment.blogpostId}});
+        await Blogpost.decrement({commentCount: 1}, {where: {id: comment.blogpostId}});
       },
       afterBulkCreate: async (comments, options) => {
         // Group comments by blogpostId and count them using Sequelize's aggregate function

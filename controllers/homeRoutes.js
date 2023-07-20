@@ -23,19 +23,14 @@ router.get('/',withAuth, async (req, res) => {
 
 router.get('/blogpost/:id', withAuth,async (req, res) => {
   try {
-    const blogpostData = await Blogpost.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['name'],
-        },
-      ],
-    });
-
+    const blogpostId = req.params.id
+    const blogpostData = await blogpostGet.findByPk(blogpostId);
     const blogpost = blogpostData.get({ plain: true });
+    const commentData = await commentGet.findAllWithBlogpost(blogpostId);
+    const comments = commentData.get({ plain: true })
 
     res.render('blogpost', {
-      ...blogpost,
+      ...blogpost, comments,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -47,7 +42,7 @@ router.get('/blogpost/:id', withAuth,async (req, res) => {
 router.get('/profile', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
+    const userData = await User.findByPk(req.session.userId, {
       attributes: { exclude: ['password'] },
       include: [{ model: Blogpost }],
     });

@@ -2,7 +2,6 @@ const User = require('./User');
 const Blogpost = require('./Blogpost');
 const Comment = require('./Comment');
 const Tag = require('./Tag');
-const BlogpostComment = require('./BlogpostComment');
 const BlogpostTag = require('./BlogpostTag');
 
 

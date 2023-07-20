@@ -22,7 +22,7 @@ router.put('/:id',  async (req, res) => {
     if (req.session.userId !== blogpost.userId) {
       res
         .status(400)
-        .json({ message: 'You can only update your own tasks.' });
+        .json({ message: 'You can only update your own posts.' });
       return;
     }
 

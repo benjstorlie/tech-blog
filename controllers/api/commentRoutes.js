@@ -22,7 +22,7 @@ router.put('/:id',  async (req, res) => {
       if (req.session.userId !== comment.userId) {
         res
           .status(400)
-          .json({ message: 'You can only update your own tasks.' });
+          .json({ message: 'You can only update your own comments.' });
         return;
       }
 
