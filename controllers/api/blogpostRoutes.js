@@ -1,8 +1,7 @@
 const router = require('express').Router();
 const { Blogpost, User, Tag, Comment } = require('../../models');
-const withAuth = require('../../utils/auth');
 
-router.post('/', withAuth, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const newBlogpost = await Blogpost.create({
       ...req.body,
@@ -15,7 +14,29 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-router.delete('/:id', withAuth, async (req, res) => {
+router.put('/:id',  async (req, res) => {
+  try {
+    const blogpostId = req.params.id;
+    const blogpost = await Blogpost.findByPk(blogpostId);
+
+      if (req.session.userId !== blogpost.userId) {
+        res
+          .status(400)
+          .json({ message: 'You can only update your own tasks.' });
+        return;
+      }
+
+      blogpost.set( req.body )
+      
+      blogpost.save();
+      res.status(200).json("Success.");
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  }
+);
+
+router.delete('/:id', async (req, res) => {
   try {
     const blogpostData = await Blogpost.destroy({
       where: {
@@ -39,7 +60,7 @@ const get = {
   /**
    * Find all blogposts. Default is return limit 5, ordered by createdAt, descending.
    * @param {Object} [options] - A hash of options to describe the scope of the search
-   * @returns {Promise<Array<Blogpost>>}
+   * @returns {Promise<{count: number|number[], rows: Blogpost[]}>}
    */
   async findAll(options={}) {
     const query = { 
@@ -51,13 +72,13 @@ const get = {
       ]
     }
 
-    return Blogpost.findAll({...options, ...query})
+    return Blogpost.findAndCountAll({...options, ...query})
   },
 
   /**
    * Find all blogposts, with a given tagId. Default is return limit 5, ordered by createdAt, descending.
    * @param {Object} options - A hash of options to describe the scope of the search
-   * @returns {Promise<Array<Blogpost>>}
+   * @returns {Promise<{count: number|number[], rows: Blogpost[]}>}
    */
     async findAllWithTag(tagId,options={}) {
       const query = { 
@@ -69,13 +90,13 @@ const get = {
         ]
       }
 
-      return Blogpost.findAll({...options, ...query})
+      return Blogpost.findAndCountAll({...options, ...query})
     },
 
     /**
    * Find all blogposts, with a given userId. Default is return limit 5, ordered by createdAt, descending.
    * @param {Object} options - A hash of options to describe the scope of the search
-   * @returns {Promise<Array<Blogpost>>}
+   * @returns {Promise<{count: number|number[], rows: BlogPost[]}>}
    */
       async findAllWithUser(userId,options={}) {
         const query = { 
@@ -87,7 +108,7 @@ const get = {
           ]
         }
   
-        return Blogpost.findAll({...options, ...query})
+        return Blogpost.findAndCountAll({...options, ...query})
       },
 
   /**
