@@ -1,10 +1,18 @@
 const router = require('express').Router();
-const {router:userRoutes} = require('./userRoutes');
-const {router: blogpostRoutes} = require('./blogpostRoutes');
-const {router: commentRoutes} = require('./commentRoutes');
-const {router: tagRoutes} = require('./tagRoutes');
+const {router: userRoutes} = require('./userRoutes');
+const {router: blogpostRoutes, get: blogpostGet} = require('./blogpostRoutes');
+const {router: commentRoutes, get: commentGet} = require('./commentRoutes');
+const {router: tagRoutes, get: tagGet} = require('./tagRoutes');
+const withAuth = require('../../utils/auth');
 
-router.use('/users', userRoutes);
-router.use('/projects', projectRoutes);
+router.use('/user', userRoutes);
+router.use('/blogpost',withAuth, blogpostRoutes);
+router.use('/comment',withAuth, commentRoutes);
+router.use('/tag',withAuth, tagRoutes);
 
-module.exports = router;
+module.exports = {
+  router,
+  blogpostGet,
+  commentGet,
+  tagGet
+};

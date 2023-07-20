@@ -41,7 +41,7 @@ router.delete('/:id', async (req, res) => {
     const commentData = await Comment.destroy({
       where: {
         id: req.params.id,
-        user_id: req.session.user_id,
+        userId: req.session.userId,
       },
     });
 
@@ -56,10 +56,20 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Get ALL comments
+router.get('/all', async (req, res) => {
+  try {
+    const commentData = await Comment.findAll();
+    res.status(200).json(commentData);
+  } catch {
+    res.status(500).json(err);
+  }
+})
+
 
 const get = {
   /**
-   * Find all comments. Default is return limit 5, ordered by createdAt, descending.
+   * Find and count all comments for a given blogpost. Default is return limit 5, ordered by createdAt, descending.
    * @param {Object} [options] - A hash of options to describe the scope of the search
    * @returns {Promise<{count: number|number[], rows: Comment[]}>}
    */
@@ -74,30 +84,6 @@ const get = {
     }
 
     return Comment.findAndCountAll({...options, ...query})
-  },
-
-  /**
- * Find all comments. Default is return limit 5, ordered by createdAt, descending.
- * @param {Object} [options] - A hash of options to describe the scope of the search
- * @returns {Promise<Number>}
- */
-  async countAllWithBlogpost(blogpostId,options={}) {
-    const query = { 
-      where: {blogpostId},
-    }
-
-    return Comment.count({...options, ...query})
-  },
-
-    /**
- * Find all comments. Default is return limit 5, ordered by createdAt, descending.
- * @param {Object} [options] - A hash of options to describe the scope of the search
- * @returns {Promise<Number>}
- */
-  async count(options={}) {
-
-
-    return Comment.count({...options, ...query})
   },
 }
 
