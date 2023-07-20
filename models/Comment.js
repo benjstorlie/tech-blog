@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes, fn , col } = require('sequelize');
 const sequelize = require('../config/connection');
 const Blogpost = require('./Blogpost');
 
@@ -42,14 +42,22 @@ Comment.init(
     modelName: 'comments',
     hooks: {
       afterCreate: async (comment, options) => {
-        const blogpostId = comment.blogpostId;
-        const count = await Comment.count({
-          where: { blogpostId: comment.blogpostId}
-        })
-
+        await Blogpost.increment({commentCount: 1}, {where: {id: comment.blogpostId}});
       },
-      afterUpdate: async (comment, options) => {
-
+      afterDestroy: async (comment, options) => {
+        await Blogpost.increment({commentCount: 1}, {where: {id: comment.blogpostId}});
+      },
+      afterBulkCreate: async (comments, options) => {
+        // Group comments by blogpostId and count them using Sequelize's aggregate function
+        const commentCounts = await Comment.findAll({
+          attributes: ['blogpostId', [fn('COUNT', col('id')), 'count']],
+          group: ['blogpostId'],
+          raw: true,
+        });
+        for (const countData of commentCounts) {
+          const { blogpostId, count } = countData;
+          await Blogpost.update({ commentCount: count }, { where: { id: blogpostId } });
+        }
       }
     }
   }

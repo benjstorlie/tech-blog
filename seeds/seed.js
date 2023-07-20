@@ -5,7 +5,6 @@ const userSeeds = require('./userSeeds.json');
 const blogpostSeeds = require('./blogpostSeeds.json');
 const tagSeeds = require('./tagSeeds.json');
 const commentSeeds = require('./commentSeeds.json');
-const blogpostCommentSeeds = require('./blogpostCommentSeeds.json');
 const blogpostTagSeeds = require('./blogpostTagSeeds.json');
 
 const seedDatabase = async () => {
@@ -25,10 +24,6 @@ const seedDatabase = async () => {
   });
 
   const tags = await Tag.bulkCreate(tagSeeds, {
-    returning: true,
-  });
-  
-  const blogpostComments = await BlogpostComment.bulkCreate(blogpostCommentSeeds, {
     returning: true,
   });
 
