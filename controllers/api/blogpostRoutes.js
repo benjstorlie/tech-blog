@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Blogpost } = require('../../models');
+const { Blogpost, User, Tag, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.post('/', withAuth, async (req, res) => {
@@ -35,4 +35,76 @@ router.delete('/:id', withAuth, async (req, res) => {
   }
 });
 
-module.exports = router;
+const get = {
+  /**
+   * Find all blogposts. Default is return limit 5, ordered by createdAt, descending.
+   * @param {Object} [options] - A hash of options to describe the scope of the search
+   * @returns {Promise<Array<Blogpost>>}
+   */
+  async findAll(options={}) {
+    const query = { 
+      limit: 5 ,
+      order:[['createdAt','DESC']] ,
+      include: [
+        { model: User, attributes: { exclude: ['password', 'email'] } },
+        { model: Tag, through: { attributes: [] } }, // Exclude junction table attributes 
+      ]
+    }
+
+    return Blogpost.findAll({...options, ...query})
+  },
+
+  /**
+   * Find all blogposts, with a given tagId. Default is return limit 5, ordered by createdAt, descending.
+   * @param {Object} options - A hash of options to describe the scope of the search
+   * @returns {Promise<Array<Blogpost>>}
+   */
+    async findAllWithTag(tagId,options={}) {
+      const query = { 
+        limit: 5 ,
+        order:[['createdAt','DESC']] ,
+        include: [
+          { model: User, attributes: { exclude: ['password', 'email'] } },
+          { model: Tag, where: { id: tagId}, through: { attributes: [] } }, // Exclude junction table attributes 
+        ]
+      }
+
+      return Blogpost.findAll({...options, ...query})
+    },
+
+    /**
+   * Find all blogposts, with a given userId. Default is return limit 5, ordered by createdAt, descending.
+   * @param {Object} options - A hash of options to describe the scope of the search
+   * @returns {Promise<Array<Blogpost>>}
+   */
+      async findAllWithUser(userId,options={}) {
+        const query = { 
+          limit: 5 ,
+          order:[['createdAt','DESC']] ,
+          include: [
+            { model: User, where:{ id: userId }, attributes: { exclude: ['password', 'email'] } },
+            { model: Tag, through: { attributes: [] } }, // Exclude junction table attributes 
+          ]
+        }
+  
+        return Blogpost.findAll({...options, ...query})
+      },
+
+  /**
+   * Find blogpost by primary key
+   * @param {Number | String} param - The value of the desired instance's primary key.
+   * @param {Object} [options] - find options
+   * @returns {Promise<Blogpost>}
+   */
+  async findByPk(blogpostId , options={}) {
+    const query = {
+      include: [
+        { model: User, attributes: { exclude: ['password', 'email'] } },
+        { model: Tag, through: { attributes: [] } }, // Exclude junction table attributes
+      ]
+    }
+    return Blogpost.findByPk( blogpostId, {...options, ...query} )
+  }
+}
+
+module.exports = {router , get};
