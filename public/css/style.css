@@ -15,6 +15,15 @@ body {
   height: 100px;
 }
 
+.nav-link {
+  border-radius: .25rem ;
+}
+
+.nav-link:hover {
+  background-color: #73cd32;
+  color: #122008;
+}
+
 .card-body.homepage {
   max-height: 6rem;
   overflow:hidden
@@ -37,6 +46,12 @@ body {
 .blogpost-title-link:hover {
   color:#73cd32;
   text-decoration: underline;
+}
+
+.title-date,
+.comment-date {
+  color:#508323;
+  font-size: .8em;
 }
 
 header {

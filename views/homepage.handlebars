@@ -1,17 +1,21 @@
 
+
+
+
+<div class="col-12 col-md-9">
 <nav aria-label="blogpost page navigation" class="col-12">
   <ul class="pagination justify-content-end">
     {{pagination blogpostCount page}}
   </ul>
 </nav>
-<!-- Loop over each object in the blogposts array -->
-
-<div class="col-12 col-md-9">
+  <!-- Loop over each object in the blogposts array -->
 {{#each blogposts as |blogpost| }}
 <div class="blogpost card m-3">
   <div class="card-header">
    <span class="h3 blogpost-title d-block">{{blogpost_title_link blogpost}}</span>
-    <span class="h5 card-subtitle">by {{user_link blogpost.user}}</span>
+    <span class="h5 card-subtitle">by {{user_link blogpost.user}}
+       <span class="title-date">{{format_date blogpost.createdAt}}</span>
+    </span>
     {{#each blogpost.tags as |tag|}}{{tag_link tag}}{{/each}}
   </div>
   <div class="card-body homepage">
@@ -24,4 +28,10 @@
   </div>
 </div>
 {{/each}}
+<div class="col-12 col-md-9">
+<nav aria-label="blogpost page navigation" class="col-12">
+  <ul class="pagination justify-content-end">
+    {{pagination blogpostCount page}}
+  </ul>
+</nav>
 </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Tech Blog Prototype</title>
+  <title>Tech Blog</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
    <link rel="icon" type="image/png" sizes="16x16 " href="/images/tech-blog-logo-16x16.png">
@@ -23,21 +23,21 @@
         <!-- Conditionally render login or logout links -->
         <ul class="nav justify-content-end">
           <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link btn" href="/">Home</a>
           </li>
           {{#if logged_in}}
           <li class="nav-item">
-            <a class="nav-link" href="/newpost">New Post</a>
+            <a class="nav-link btn" href="/newpost">New Post</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/profile">My Profile</a>
+            <a class="nav-link btn" href="/profile">My Profile</a>
           </li>
           <li class="nav-item">
-            <button class="btn nav-link" id="logout">Logout</button>
+            <div role="button" class="btn nav-link" id="logout">Logout</div>
           </li>
           {{else}}
           <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link btn" href="/login">Login</a>
           </li>
           {{/if}}
         </ul>

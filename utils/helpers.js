@@ -1,11 +1,12 @@
 const Handlebars = require("handlebars");
+const dayjs = require('dayjs');
 
 const colors = ["primary","success","danger","info"];
 
 module.exports = {
-  format_date: (date) => {
-    // Format date as MM/DD/YYYY
-    return date.toLocaleDateString();
+  format_date: (dateTime) => {
+    // Format date as at hh:mm on dd MM YYYY 
+    return dayjs(dateTime).format("[at] h:mm a [on] D MMM YYYY");
   },
   user_link: (user) => {
     return new Handlebars.SafeString(`<a class="username" href='/user/${user.id}'>${user.username}</a>`);
