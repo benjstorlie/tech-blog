@@ -29,7 +29,7 @@ async function savePost(commentBody) {
     method: 'POST',
     body: JSON.stringify({
       body: commentBody,
-      blogpostId: null,
+      blogpostId
     }),
     headers: { 'Content-Type': 'application/json' },
   });
