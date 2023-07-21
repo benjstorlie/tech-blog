@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Blogpost, Comment } = require('../../models');
+const { Blogpost, Comment , User} = require('../../models');
 
 router.post('/',  async (req, res) => {
   try {
@@ -59,9 +59,17 @@ router.delete('/:id', async (req, res) => {
 // Get ALL comments
 router.get('/all', async (req, res) => {
   try {
-    const commentData = await Comment.findAll();
+    const commentData = await Comment.findAll({
+      attributes: { exclude: ['userId'] },
+    });
+
+    if (!commentData) {
+      res.status(404).json({ message: 'No comment found with this id!' });
+      return;
+    }
+
     res.status(200).json(commentData);
-  } catch {
+  } catch (err){
     res.status(500).json(err);
   }
 })
@@ -69,8 +77,25 @@ router.get('/all', async (req, res) => {
 router.get('/blogpost/:id', async (req, res) => {
   try {
     const commentData = await get.findAllWithBlogpost(req.params.id);
+    if (!commentData) {
+      res.status(404).json({ message: 'No comment found with this id!' });
+      return;
+    }
     res.status(200).json(commentData);
-  } catch {
+  } catch(err) {
+    res.status(500).json(err);
+  }
+})
+
+router.get('/:id', async (req, res) => {
+  try {
+    const commentData = await get.findByPk(req.params.id);
+    if (!commentData) {
+      res.status(404).json({ message: 'No comment found with this id!' });
+      return;
+    }
+    res.status(200).json(commentData);
+  } catch(err) {
     res.status(500).json(err);
   }
 })
@@ -94,6 +119,21 @@ const get = {
 
     return Comment.findAndCountAll({...options, ...query})
   },
+
+    /**
+   * Find and count all comments for a given blogpost. Default is return limit 5, ordered by createdAt, descending.
+   * @param {Object} [options] - A hash of options to describe the scope of the search
+   * @returns {Promise<Comment>}
+   */
+    async findByPk(commentId,options={}) {
+      const query = {
+        attributes: {include: [
+          { model: User, },
+        ]}
+      }
+  
+      return Comment.findByPk(commentId,{...options, ...query})
+    },
 }
 
 

@@ -88,7 +88,7 @@ router.get('/all', async (req, res) => {
   try {
     const blogpostData = await Blogpost.findAll();
     res.status(200).json(blogpostData);
-  } catch {
+  } catch (err) {
     res.status(500).json(err);
   }
 });
@@ -98,16 +98,25 @@ router.get('/', async (req, res) => {
     const page = req.query.page;
     const blogpostData = await get.findAll({offset: (page > 1 ? (page-1)*5 : 0)});
     res.status(200).json(blogpostData);
-  } catch {
+  } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    const blogpostData = await get.findByPk(id);
+    const blogpostData = await get.findByPk(req.params.id);
     res.status(200).json(blogpostData);
-  } catch {
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/includeAll/:id', async (req, res) => {
+  try {
+    const blogpostData = await get.findByPkIncludeAll(req.params.id);
+    res.status(200).json(blogpostData);
+  } catch (err) {
     res.status(500).json(err);
   }
 });
@@ -184,7 +193,29 @@ const get = {
       ]
     }
     return Blogpost.findByPk( blogpostId, {...options, ...query} )
-  }
+  },
+
+    /**
+   * Find blogpost by primary key
+   * @param {Number | String} param - The value of the desired instance's primary key.
+   * @param {Object} [options] - find options
+   * @returns {Promise<Blogpost>}
+   */
+    async findByPkIncludeAll(blogpostId , options={}) {
+      const query = {
+        include: [
+          { model: User, attributes: { exclude: ['password', 'email'] } },
+          { model: Comment, 
+          //   attributes: {
+          //     include: [
+          //       { model: User, attributes: { exclude: ['password', 'email'] } }
+          //     ]}
+          },
+          { model: Tag, through: { attributes: [] } }, // Exclude junction table attributes
+        ]
+      }
+      return Blogpost.findByPk( blogpostId, {...options, ...query} )
+    }
 }
 
 module.exports = {router , get};

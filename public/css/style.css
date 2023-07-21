@@ -10,7 +10,7 @@ body {
   height: 100px;
 }
 
-.card-body {
+.card-body.homepage {
   max-height: 6rem;
   overflow:hidden
 }
