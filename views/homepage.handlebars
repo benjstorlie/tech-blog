@@ -18,7 +18,9 @@
     {{blogpost.body}}
   </div>
   <div class="card-footer">
-    {{blogpost_comment_link blogpost}}
+    <span class="comment-count">
+    {{blogpost_comment_count_link blogpost}}
+    </span>
   </div>
 </div>
 {{/each}}

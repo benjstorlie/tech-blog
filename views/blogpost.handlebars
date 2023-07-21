@@ -10,11 +10,39 @@
       {{blogpost.body}}
     </div>
     <div class="card-footer">
-      {{blogpost_comment_link blogpost}}
+      <span class="comment-count">
+      {{#if blogpost.commentCount}}
+      {{blogpost_page_comment_count blogpost}}
+      {{else}}
+      0 Comments
+      {{/if}}
+      </span>
     </div>
   </div>
+  <div class="comment-form-box card m-3 p-1">
+  {{#if logged_in}}
+    <form id="add-comment-form" novalidate>
+      <div class="form-group">
+        <label for="comment-textarea">Add a comment!</label>
+        <textarea class="form-control" id="comment-textarea" rows="3" required></textarea>
+        <div class="invalid-feedback">
+          Comment must not be blank.
+        </div>
+      </div>
+      <div type="submit" class="btn submit-btn">Post My Comment</button>
+    </form>
+  {{else}}
+    <form id="add-comment-form" novalidate>
+      <div class="form-group">
+        <textarea class="form-control" id="comment-textarea" rows="3" disabled></textarea>
+      </div>
+      <div class="login-btn submit-btn btn">Log in to add a comment!</div>
+    </form>
+  {{/if}}
+  </div>
+
   {{#if blogpost.commentCount}}
-  <div class="comments-block card m-3">
+  <div id="comments" class="comments-block card m-3">
     <ul class="list-group list-group-flush">
     {{#each comments as |comment|}}
     <li class="list-group-item comment">
@@ -25,10 +53,6 @@
     </ul>
   </div>
   {{/if}}
-  <div class="comment-form-box">
-    <form id="add-comment-form">
-
-    </form>
-  </div>
 
 </div>
+<!-- Render script for logged in users only -->

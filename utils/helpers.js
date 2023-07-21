@@ -17,8 +17,11 @@ module.exports = {
   blogpost_title_link: (blogpost) => {
     return new Handlebars.SafeString(`<a class="blogpost-title-link" href="/blogpost/${blogpost.id}">${blogpost.title}</a>`);
   },
-  blogpost_comment_link: (blogpost) => {
-    return new Handlebars.SafeString(`<a class="card-link comment-link" href="/blogpost/${blogpost.id}">${blogpost.commentCount} Comment${blogpost.commentCount == 1 ? '' : 's'}</a>`);
+  blogpost_comment_count_link: (blogpost) => {
+    return new Handlebars.SafeString(`<a class="comment-link" href="/blogpost/${blogpost.id}">${blogpost.commentCount} Comment${blogpost.commentCount == 1 ? '' : 's'}</a>`);
+  },
+  blogpost_page_comment_count: (blogpost) => {
+    return new Handlebars.SafeString(`<a class="comment-link" href="/blogpost/${blogpost.id}#comments">${blogpost.commentCount} Comment${blogpost.commentCount == 1 ? '' : 's'}</a>`);
   },
   pagination: (blogpostCount,page) => {
     if (blogpostCount <= 5) {

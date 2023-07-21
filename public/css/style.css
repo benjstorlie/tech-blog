@@ -1,3 +1,7 @@
+a {
+  color: inherit;
+}
+
 body {
   background-color: #122008;
   color:#93d961;
@@ -16,8 +20,8 @@ body {
   overflow:hidden
 }
 
-.comment-link {
-  color:#f08080;
+.comment-count {
+  color: #f08080;
 }
 
 .comment-link:hover {
@@ -25,9 +29,10 @@ body {
   text-decoration: none;
 }
 
-.blogpost-title-link {
+.blogpost-title {
   color:#73cd32;
 }
+
 
 .blogpost-title-link:hover {
   color:#73cd32;
@@ -68,4 +73,20 @@ header {
 .list-group-item {
   background-color: inherit;
   border-color: inherit;
+}
+
+.submit-btn {
+  background-color: #2c4f13;
+  border:1px solid #bee8a0;
+  color: #bee8a0;
+}
+
+.submit-btn:hover {
+  font-weight: bold;
+}
+
+.submit-btn:active {
+  font-weight: bold;
+  background-color: #233f0f;
+  color:#73cd32
 }
