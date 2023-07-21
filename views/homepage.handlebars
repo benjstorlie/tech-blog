@@ -5,13 +5,14 @@
   </ul>
 </nav>
 <!-- Loop over each object in the blogposts array -->
+
 <div class="col-12 col-md-9">
 {{#each blogposts as |blogpost| }}
 <div class="blogpost card m-3">
   <div class="card-header">
     {{blogpost_link blogpost}}
     {{user_link blogpost.user}}
-    {{#each blogpost.tags as |tag|}}{{tag_link tag}}{{/each}}
+    {{#each blogpost.tag as |tag|}}{{tag_link tag}}{{/each}}
   </div>
   <div class="card-body">
     {{blogpost.body}}
