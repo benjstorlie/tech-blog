@@ -95,7 +95,8 @@ router.get('/all', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const blogpostData = await get.findAll();
+    const page = req.query.page;
+    const blogpostData = await get.findAll({offset: (page > 1 ? (page-1)*5 : 0)});
     res.status(200).json(blogpostData);
   } catch {
     res.status(500).json(err);

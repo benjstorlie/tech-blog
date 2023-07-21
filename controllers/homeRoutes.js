@@ -5,15 +5,28 @@ const withAuth = require('../utils/auth');
 
 router.get('/',withAuth, async (req, res) => {
   try {
+    // page will be 1-indexed, because users see it. 
+    const page = req.query.page || 1;
+    
     // Get all projects and JOIN with user data
-    const blogpostData = await blogpostGet.findAll();
+    const blogpostData = await blogpostGet.findAll((page > 1 ?{offset: 5*(page-1)} : {}));
+
+    const blogpostCount = blogpostData.count;
+
+    if (!blogpostData.rows.length) {
+      res.render('noposts', { 
+        blogpostCount, page, 
+        logged_in: req.session.logged_in 
+      });
+      return;
+    }
 
     // Serialize data so the template can read it
-    const blogposts = blogpostData.map((blogpost) => blogpost.get({ plain: true }));
+    const blogposts = blogpostData.rows.map((blogpost) => blogpost.get({ plain: true }));
 
     // Pass serialized data and session flag into template
     res.render('homepage', { 
-      blogposts, 
+      blogposts, blogpostCount, page, 
       logged_in: req.session.logged_in 
     });
   } catch (err) {
