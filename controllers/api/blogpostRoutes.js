@@ -206,10 +206,10 @@ const get = {
         include: [
           { model: User, attributes: { exclude: ['password', 'email'] } },
           { model: Comment, 
-          //   attributes: {
-          //     include: [
-          //       { model: User, attributes: { exclude: ['password', 'email'] } }
-          //     ]}
+            attributes: {
+              include: [
+                { model: User, attributes: { exclude: ['password', 'email'] } }
+              ]}
           },
           { model: Tag, through: { attributes: [] } }, // Exclude junction table attributes
         ]

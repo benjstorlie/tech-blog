@@ -37,11 +37,12 @@ router.get('/',withAuth, async (req, res) => {
 router.get('/blogpost/:id', withAuth,async (req, res) => {
   try {
     const blogpostId = req.params.id;
-    const blogpostData = await blogpostGet.findByPkIncludeAll(blogpostId);
+    const blogpostData = await blogpostGet.findByPk(blogpostId);
+    const commentData = await commentGet.findAllWithBlogpost(blogpostId);
     const blogpost = blogpostData.get({ plain: true });
-
+    const comments = commentData.rows.map((comment) => comment.get({ plain: true }));
     res.render('blogpost', {
-      blogpost,
+      blogpost, comments,
       logged_in: req.session.logged_in
     });
   } catch (err) {

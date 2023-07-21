@@ -1,5 +1,6 @@
 body {
   background-color: #122008;
+  color:#93d961;
 }
 
 #logo {
@@ -40,7 +41,7 @@ header {
 }
 
 .card {
-  color:#93d961;
+  
   border: 1px solid #bee8a0;
   background-color: #091004;
 }
@@ -62,4 +63,9 @@ header {
 .username:hover {
   color: #0056b3;
   text-decoration: none;
+}
+
+.list-group-item {
+  background-color: inherit;
+  border-color: inherit;
 }
