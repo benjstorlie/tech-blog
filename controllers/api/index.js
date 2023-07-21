@@ -19,9 +19,9 @@ router.get('/blogpostTag', withAuth, async (req, res) => {
 });
 
 router.use('/user', userRoutes);
-router.use('/blogpost',withAuth, blogpostRoutes);
-router.use('/comment',withAuth, commentRoutes);
-router.use('/tag',withAuth, tagRoutes);
+router.use('/blogpost', blogpostRoutes);
+router.use('/comment', commentRoutes);
+router.use('/tag', tagRoutes);
 
 module.exports = {
   router,

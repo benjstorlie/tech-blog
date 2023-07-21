@@ -53,18 +53,25 @@ router.get('/blogpost/:id', withAuth,async (req, res) => {
 // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.userId, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Blogpost }],
-    });
+    if (false) {
+      // Find the logged in user based on the session ID
+      const userData = await User.findByPk(req.session.userId, {
+        attributes: { exclude: ['password'] },
+        include: [{ model: Blogpost }],
+      });
 
-    const user = userData.get({ plain: true });
+      const user = userData.get({ plain: true });
 
-    res.render('profile', {
-      ...user,
-      logged_in: true
-    });
+      res.render('profile', {
+        ...user,
+        logged_in: true
+      });
+    } else {
+      res.render('errorpage', {
+      message: "Profile Page Coming Soon",
+      logged_in: req.session.logged_in
+      })
+    }
   } catch (err) {
     res.status(500).json(err);
   }
@@ -79,5 +86,45 @@ router.get('/login', (req, res) => {
 
   res.render('login');
 });
+
+router.get('/profile',withAuth, async (req, res) => {
+  try {
+    if (false) {
+      // Find the logged in user based on the session ID
+      const userData = await User.findByPk(req.session.userId, {
+        attributes: { exclude: ['password'] },
+        include: [{ model: Blogpost }],
+      });
+
+      const user = userData.get({ plain: true });
+
+      res.render('profile', {
+        ...user,
+        logged_in: true
+      });
+    } else {
+      res.render('errorpage', {
+      message: "Profile Page Coming Soon",
+      logged_in: true
+      })
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/tag/:id',async (req,res) => {
+  res.render('errorpage', {
+    message: "Search posts by tag coming soon",
+    logged_in: req.session.logged_in
+    })
+})
+
+router.get('/user/:id',async (req,res) => {
+  res.render('errorpage', {
+    message: "Search posts by user coming soon",
+    logged_in: req.session.logged_in
+    })
+})
 
 module.exports = router;
