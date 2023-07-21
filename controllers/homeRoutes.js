@@ -14,7 +14,7 @@ router.get('/',withAuth, async (req, res) => {
     const blogpostCount = blogpostData.count;
 
     if (!blogpostData.rows.length) {
-      res.render('noposts', { 
+      res.render('errorpage', { 
         blogpostCount, page, 
         logged_in: req.session.logged_in 
       });

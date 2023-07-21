@@ -21,18 +21,18 @@
   </div>
   <div class="comment-form-box card m-3 p-1">
   {{#if logged_in}}
-    <form id="add-comment-form" novalidate>
+    <form id="add-comment-form">
       <div class="form-group">
         <label for="comment-textarea">Add a comment!</label>
-        <textarea class="form-control" id="comment-textarea" rows="3" required></textarea>
-        <div class="invalid-feedback">
-          Comment must not be blank.
-        </div>
+        <textarea class="form-control" id="comment-textarea" rows="3"></textarea>
       </div>
+       <div class="invalid-feedback">
+          Comment must not be blank
+        </div>
       <div type="submit" class="btn submit-btn">Post My Comment</button>
     </form>
   {{else}}
-    <form id="add-comment-form" novalidate>
+    <form id="add-comment-form">
       <div class="form-group">
         <textarea class="form-control" id="comment-textarea" rows="3" disabled></textarea>
       </div>
@@ -55,4 +55,5 @@
   {{/if}}
 
 </div>
-<!-- Render script for logged in users only -->
+
+<script src="/js/commentForm.js"></script>
