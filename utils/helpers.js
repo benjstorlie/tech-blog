@@ -8,17 +8,17 @@ module.exports = {
     return date.toLocaleDateString();
   },
   user_link: (user) => {
-    return new Handlebars.SafeString(`by <a href='/user/${user.id}'>${user.username}</a>`);
+    return new Handlebars.SafeString(`by <a class="username" href='/user/${user.id}'>${user.username}</a>`);
   },
   tag_link: (tag) => {
     const color = colors[tag.id % 4];
     return new Handlebars.SafeString(`<a href='/tag/${tag.id}' class='badge badge-pill badge-${color}'>${tag.tagName}</a> `);
   },
-  blogpost_link: (blogpost) => {
-    return new Handlebars.SafeString(`<a href="/blogpost/${blogpost.id}" class="card-title">${blogpost.title}</a>`);
+  blogpost_title_link: (blogpost) => {
+    return new Handlebars.SafeString(`<a href="/blogpost/${blogpost.id}" class="blogpost-title h5 d-block">${blogpost.title}</a>`);
   },
   blogpost_comment_link: (blogpost) => {
-    return new Handlebars.SafeString(`<a href="/blogpost/${blogpost.id}">${blogpost.commentCount} Comments</a>`);
+    return new Handlebars.SafeString(`<a class="card-link" href="/blogpost/${blogpost.id}">${blogpost.commentCount} Comment${blogpost.commentCount == 1 ? '' : 's'}</a>`);
   },
   pagination: (blogpostCount,page) => {
     if (blogpostCount <= 5) {
