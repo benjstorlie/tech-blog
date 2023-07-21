@@ -1,7 +1,6 @@
 [
   {
     "id": 1,
-    "title": "Roll 'Em Up",
     "body": "A game for Windows and macOS where players move a ball through a series of increasingly challenging mazes.",
     "createdAt": "2023-07-05T01:21:22.806Z",
     "blogpostId": "1",
@@ -9,7 +8,6 @@
   },
   {
     "id": 2,
-    "title": "Roll 'Em Up",
     "body": "A game for Windows and macOS where players move a ball through a series of increasingly challenging mazes.",
     "createdAt": "2023-07-05T01:21:22.806Z",
     "blogpostId": "2",
@@ -17,7 +15,6 @@
   },
   {
     "id": 3,
-    "title": "Roll 'Em Up",
     "body": "A game for Windows and macOS where players move a ball through a series of increasingly challenging mazes.",
     "blogpostId": "2",
     "createdAt": "2023-07-05T01:21:22.806Z",
@@ -25,7 +22,6 @@
   },
   {
     "id": 4,
-    "title": "Roll 'Em Up",
     "body": "A game for Windows and macOS where players move a ball through a series of increasingly challenging mazes.",
     "createdAt": "2023-07-05T01:21:22.806Z",
     "blogpostId": "3",

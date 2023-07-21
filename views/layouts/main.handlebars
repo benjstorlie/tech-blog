@@ -5,54 +5,20 @@
   <title>Tech Blog Prototype</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <link rel="icon" type="image/png" sizes="16x16 " href="/images/tech-blog-logo-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/tech-blog-logo-32x32.png">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  {{!-- <link rel="stylesheet" type="text/css" href="./assets/css/style.css" /> --}}
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+
 </head>
-<style>
-.card-body {
-  max-height: 6rem;
-  overflow:hidden
-}
 
-.card-link {
-  color:#f08080;
-}
-
-.card-link:hover {
-  color:#e83c3c;
-  text-decoration: none;
-}
-
-header {
-  border-bottom: 4px solid #f8f9fa; 
-}
-
-.card {
-  border: 1px solid #f8f9fa;
-}
-
-.card-header {
-  border-bottom: 1px solid #f8f9fa;
-}
-
-.card-footer {
-  border-top: 1px solid #f8f9fa;
-}
-
-.username {
-  color: #81beff
-}
-
-.username:hover {
-  color: #0056b3;
-  text-decoration: none;
-}
-
-</style>
-<body class="bg-dark">
-  <div class="container container-fluid">
-    <header class="row bg-secondary py-3">
-      <div id="header-logo" class="col-12 col-md-4"></div>
+<body>
+  <div class="container-fluid vw-100">
+    <header class="row py-3">
+      <div id="header-logo" class="col-12 col-md-4">
+        <img id="logo" src="/images/tech-blog-logo.png" alt="logo">
+        <img id="logo-text" src="/images/tech-blog-logo-text.png" alt="tech blog">
+      </div>
       <nav class="col-12 col-md-8">
         <!-- Conditionally render login or logout links -->
         {{#if logged_in}}
@@ -61,6 +27,17 @@ header {
         {{else}}
         <a href="/login">login</a>
         {{/if}}
+        <ul class="nav justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">New Post</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">My Profile</a>
+          </li>
+        </ul>
       </nav>
     </header>
     <main class="row p-3">

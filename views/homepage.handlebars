@@ -9,9 +9,9 @@
 <div class="col-12 col-md-9">
 {{#each blogposts as |blogpost| }}
 <div class="blogpost card m-3 text-light bg-dark">
-  <div class="card-header bg-secondary">
-    {{blogpost_title_link blogpost}}
-    {{user_link blogpost.user}}
+  <div class="card-header">
+   <span class="h3 blogpost-title d-block">{{blogpost_title_link blogpost}}</span>
+    <span class="h5 card-subtitle">by {{user_link blogpost.user}}</span>
     {{#each blogpost.tags as |tag|}}{{tag_link tag}}{{/each}}
   </div>
   <div class="card-body">

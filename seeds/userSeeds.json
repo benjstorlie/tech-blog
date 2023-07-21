@@ -1,30 +1,37 @@
 [
   {
     "id": 1,
-    "username": "Sal",
+    "username": "Teri Dactyl",
     "email": "sal@hotmail.com",
     "password": "password12345",
     "createdAt": "2022-12-04T01:20:15.964Z"
   },
   {
     "id": 2,
-    "username": "Lernantino",
+    "username": "Paige Turner",
     "email": "lernantino@gmail.com",
     "password": "password12345",
     "createdAt": "2023-02-04T01:21:12.101Z"
   },
   {
     "id": 3,
-    "username": "Amiko",
+    "username": "Pete Tsar",
     "email": "amiko2k20@aol.com",
     "password": "password12345",
     "createdAt": "2023-06-01T01:21:22.806Z"
   },
   {
     "id": 4,
-    "username": "Test",
+    "username": "Greg Arias",
     "email": "test@test.com",
     "password": "test",
     "createdAt": "2023-06-04T01:21:22.806Z"
+  },
+  {
+    "id": 5,
+    "username": "Lois Di Nominator",
+    "email": "ldn@test.net",
+    "password": "test",
+    "createdAt": "2023-06-12T10:21:22.806Z"
   }
 ]

@@ -26,5 +26,33 @@
   {
     "blogpostId": 4,
     "tagId": 5
+  },
+  {
+    "blogpostId": 4,
+    "tagId": 7
+  },
+  {
+    "blogpostId": 6,
+    "tagId": 1
+  },
+  {
+    "blogpostId": 6,
+    "tagId": 3
+  },
+  {
+    "blogpostId": 6,
+    "tagId": 6
+  },
+  {
+    "blogpostId": 6,
+    "tagId": 8
+  },
+  {
+    "blogpostId": 7,
+    "tagId": 3
+  },
+  {
+    "blogpostId": 7,
+    "tagId": 2
   }
 ]
