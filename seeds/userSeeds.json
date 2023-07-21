@@ -3,24 +3,28 @@
     "id": 1,
     "username": "Sal",
     "email": "sal@hotmail.com",
-    "password": "password12345"
+    "password": "password12345",
+    "createdAt": "2022-12-04T01:20:15.964Z"
   },
   {
     "id": 2,
     "username": "Lernantino",
     "email": "lernantino@gmail.com",
-    "password": "password12345"
+    "password": "password12345",
+    "createdAt": "2023-02-04T01:21:12.101Z"
   },
   {
     "id": 3,
     "username": "Amiko",
     "email": "amiko2k20@aol.com",
-    "password": "password12345"
+    "password": "password12345",
+    "createdAt": "2023-06-01T01:21:22.806Z"
   },
   {
     "id": 4,
     "username": "Test",
     "email": "test@test.com",
-    "password": "test"
+    "password": "test",
+    "createdAt": "2023-06-04T01:21:22.806Z"
   }
 ]

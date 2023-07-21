@@ -125,7 +125,8 @@ const get = {
       include: [
         { model: User, attributes: { exclude: ['password', 'email'] } },
         { model: Tag, through: { attributes: [] } }, // Exclude junction table attributes 
-      ]
+      ],
+      distinct: true, 
     }
 
     return Blogpost.findAndCountAll({...options, ...query})
@@ -143,7 +144,8 @@ const get = {
         include: [
           { model: User, attributes: { exclude: ['password', 'email'] } },
           { model: Tag, where: { id: tagId}, through: { attributes: [] } }, // Exclude junction table attributes 
-        ]
+        ],
+        distinct: true, 
       }
 
       return Blogpost.findAndCountAll({...options, ...query})
@@ -161,7 +163,8 @@ const get = {
           include: [
             { model: User, where:{ id: userId }, attributes: { exclude: ['password', 'email'] } },
             { model: Tag, through: { attributes: [] } }, // Exclude junction table attributes 
-          ]
+          ],
+          distinct: true, 
         }
   
         return Blogpost.findAndCountAll({...options, ...query})
