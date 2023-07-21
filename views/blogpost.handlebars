@@ -21,14 +21,14 @@
   </div>
   <div class="comment-form-box card m-3 p-1">
   {{#if logged_in}}
-    <form id="add-comment-form">
+    <form id="add-comment-form" data-blogpostId="{{blogpost.id}}">
       <div class="form-group">
         <label for="comment-textarea">Add a comment!</label>
         <textarea class="form-control" id="comment-textarea" rows="3"></textarea>
-      </div>
        <div class="invalid-feedback">
           Comment must not be blank
         </div>
+      </div>
       <button type="submit" class="btn submit-btn">Post My Comment</button>
     </form>
   {{else}}

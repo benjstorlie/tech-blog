@@ -14,13 +14,13 @@ async function addPost(event) {
   if (!blogpostBody || !blogpostTitle) {
     if (!blogpostTitle) {
       blogpostTitleEl.classList.add("is-invalid");
-      blogpostTitleEl.addEventListener("change",() => {
+      blogpostTitleEl.addEventListener("input",() => {
         blogpostTitleEl.classList.remove("is-invalid");
       }, {once: true})
     }
     if (!blogpostBody) {
       blogpostBodyEl.classList.add("is-invalid");
-      blogpostBodyEl.addEventListener("change",() => {
+      blogpostBodyEl.addEventListener("input",() => {
         blogpostBodyEl.classList.remove("is-invalid");
       }, {once: true})
     }
@@ -40,15 +40,19 @@ async function savePost(title,body) {
       body
     }),
     headers: { 'Content-Type': 'application/json' },
-  });
-  if (response.ok) {
+  })
+  const data = await response.json();
+  if (response.ok && data.body && data.title && data.userId) {
+    const blogData = await response.json();
     submitButton.innerText = "Posted!!";
-    location.assign('/blogpost/'+response.body.id);
+    location.assign('/blogpost/'+blogData.id);
   } else {
-    console.log(response)
+  console.log(data);
     submitButton.innerText = "Failed to Post :(";
-    blogpostBodyEl.addEventListener("change",() => {
+
+    blogpostBodyEl.addEventListener("input",() => {
       submitButton.innerText = "Submit";
     }, {once: true})
   }
+
 }

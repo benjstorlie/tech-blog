@@ -1,6 +1,8 @@
 
 
 const commentForm = document.getElementById('add-comment-form');
+const blogpostId = commentForm.getAttribute("data-blogpostId");
+
 const blogpostBodyEl = document.querySelector('#add-comment-form textarea');
 const submitButton = document.querySelector('.submit-btn');
 commentForm.addEventListener("submit", addPost);
@@ -12,7 +14,7 @@ async function addPost(event) {
 
   if (!commentBody) {
     blogpostBodyEl.classList.add("is-invalid");
-    blogpostBodyEl.addEventListener("change",() => {
+    blogpostBodyEl.addEventListener("input",() => {
       blogpostBodyEl.classList.remove("is-invalid");
     }, {once: true})
     return;
@@ -26,17 +28,20 @@ async function savePost(commentBody) {
   const response = await fetch('/api/comment', {
     method: 'POST',
     body: JSON.stringify({
-      body: commentBody
+      body: commentBody,
+      blogpostId: null,
     }),
     headers: { 'Content-Type': 'application/json' },
   });
-  if (response.ok) {
-    submitButton.innerText = "Posted!!"
-    location.assign( location.pathname + '#comments');
+    const data = await response.json();
+  if (response.ok && data.body && data.blogpostId && data.userId) {
+    submitButton.innerText = "Posted!!";
+    location.href = location.pathname + '#comments';
+    location.reload();
   } else {
-    console.log(response)
+    console.log(data);
     submitButton.innerText = "Failed to Comment :(";
-    blogpostBodyEl.addEventListener("change",() => {
+    blogpostBodyEl.addEventListener("input",() => {
       submitButton.innerText = "Post My Comment";
     }, {once: true})
   }
