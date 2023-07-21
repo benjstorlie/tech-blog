@@ -8,16 +8,16 @@
 
 <div class="col-12 col-md-9">
 {{#each blogposts as |blogpost| }}
-<div class="blogpost card m-3">
-  <div class="card-header">
+<div class="blogpost card m-3 text-light bg-dark border border-white border-2">
+  <div class="card-header bg-secondary border-bottom border-white border-1">
     {{blogpost_link blogpost}}
     {{user_link blogpost.user}}
-    {{#each blogpost.tag as |tag|}}{{tag_link tag}}{{/each}}
+    {{#each blogpost.tags as |tag|}}{{tag_link tag}}{{/each}}
   </div>
   <div class="card-body">
     {{blogpost.body}}
   </div>
-  <div class="card-footer">
+  <div class="card-footer bg-secondary">
     {{blogpost_comment_link blogpost}}
   </div>
 </div>

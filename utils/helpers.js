@@ -1,17 +1,6 @@
 const Handlebars = require("handlebars");
 
-const colors = ["primary","success","danger","warning","info"];
-
-// --blue: #007bff;
-//     --indigo: #6610f2;
-//     --purple: #6f42c1;
-//     --pink: #e83e8c;
-//     --red: #dc3545;
-//     --orange: #fd7e14;
-//     --yellow: #ffc107;
-//     --green: #28a745;
-//     --teal: #20c997;
-//     --cyan: #17a2b8;
+const colors = ["primary","success","danger","info"];
 
 module.exports = {
   format_date: (date) => {
@@ -22,8 +11,8 @@ module.exports = {
     return new Handlebars.SafeString(`by <a href='/user/${user.id}'>${user.username}</a>`);
   },
   tag_link: (tag) => {
-    const color = colors[tag.id % 5];
-    return new Handlebars.SafeString(`<a href='/tag/${tag.id}' class='badge badge-pill badge-${color}'>${tag.tagName}</a>`);
+    const color = colors[tag.id % 4];
+    return new Handlebars.SafeString(`<a href='/tag/${tag.id}' class='badge badge-pill badge-${color}'>${tag.tagName}</a> `);
   },
   blogpost_link: (blogpost) => {
     return new Handlebars.SafeString(`<a href="/blogpost/${blogpost.id}" class="card-title">${blogpost.title}</a>`);
