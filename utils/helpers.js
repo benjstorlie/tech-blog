@@ -12,7 +12,7 @@ module.exports = {
   },
   tag_link: (tag) => {
     const color = colors[tag.id % 5];
-    return new Handlebars.SafeString(`<a href='/tag/${tag.id}' class='badge badge-pill badge-${color}'>${tag.tagName}</a>"`);
+    return new Handlebars.SafeString(`<a href='/tag/${tag.id}' class='badge badge-pill badge-${color}'>${tag.tagName}</a>`);
   },
   blogpost_link: (blogpost) => {
     return new Handlebars.SafeString(`<a href="/blogpost/${blogpost.id}" class="card-title">${blogpost.title}</a>`);

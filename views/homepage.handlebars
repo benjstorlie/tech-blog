@@ -11,7 +11,7 @@
   <div class="card-header">
     {{blogpost_link blogpost}}
     {{user_link blogpost.user}}
-    {{#each blogpost.tag as |tag|}}{{tag_link tag}}{{/each}}
+    {{#each blogpost.tags as |tag|}}{{tag_link tag}}{{/each}}
   </div>
   <div class="card-body">
     {{blogpost.body}}
