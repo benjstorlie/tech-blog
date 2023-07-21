@@ -7,6 +7,7 @@ commentForm.addEventListener("submit", addPost);
 
 
 async function addPost(event) {
+  event.preventDefault();
   let commentBody = blogpostBodyEl.value.trim();
 
   if (!commentBody) {
@@ -33,6 +34,7 @@ async function savePost(commentBody) {
     submitButton.innerText = "Posted!!"
     location.assign( location.pathname + '#comments');
   } else {
+    console.log(response)
     submitButton.innerText = "Failed to Comment :(";
     blogpostBodyEl.addEventListener("change",() => {
       submitButton.innerText = "Post My Comment";

@@ -2,10 +2,12 @@ const newPostForm = document.getElementById('new-post-form');
 const blogpostTitleEl = document.querySelector('#new-post-form input');
 const blogpostBodyEl = document.querySelector('#new-post-form textarea');
 const submitButton = document.querySelector('.submit-btn');
-commentForm.addEventListener("submit", addPost);
+newPostForm.addEventListener("submit", addPost);
 
 
 async function addPost(event) {
+  event.preventDefault();
+
   let blogpostBody = blogpostBodyEl.value.trim();
   let blogpostTitle = blogpostTitleEl.value.trim();
 
@@ -41,8 +43,9 @@ async function savePost(title,body) {
   });
   if (response.ok) {
     submitButton.innerText = "Posted!!";
-    location.assign('/blogpost/'+response.id);
+    location.assign('/blogpost/'+response.body.id);
   } else {
+    console.log(response)
     submitButton.innerText = "Failed to Post :(";
     blogpostBodyEl.addEventListener("change",() => {
       submitButton.innerText = "Submit";

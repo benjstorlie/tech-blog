@@ -86,6 +86,17 @@ router.get('/login', (req, res) => {
 
   res.render('login');
 });
+router.get('/newpost',withAuth, async (req, res) => {
+  try {
+  
+  res.render('newpost', {
+  logged_in: req.session.logged_in
+  })
+
+  } catch (err) {
+  res.status(500).json(err);
+  }
+});
 
 router.get('/profile',withAuth, async (req, res) => {
   try {
@@ -105,7 +116,7 @@ router.get('/profile',withAuth, async (req, res) => {
     } else {
       res.render('errorpage', {
       message: "Profile Page Coming Soon",
-      logged_in: true
+      logged_in: req.session.logged_in
       })
     }
   } catch (err) {

@@ -24,14 +24,14 @@
     "id": 4,
     "username": "Greg Arias",
     "email": "test@test.com",
-    "password": "test",
+    "password": "test12345",
     "createdAt": "2023-06-04T01:21:22.806Z"
   },
   {
     "id": 5,
     "username": "Lois Di Nominator",
     "email": "ldn@test.net",
-    "password": "test",
+    "password": "test12345",
     "createdAt": "2023-06-12T10:21:22.806Z"
   }
 ]
