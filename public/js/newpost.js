@@ -43,9 +43,8 @@ async function savePost(title,body) {
   })
   const data = await response.json();
   if (response.ok && data.body && data.title && data.userId) {
-    const blogData = await response.json();
     submitButton.innerText = "Posted!!";
-    location.assign('/blogpost/'+blogData.id);
+    location.assign('/blogpost/'+data.id);
   } else {
   console.log(data);
     submitButton.innerText = "Failed to Post :(";

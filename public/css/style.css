@@ -60,6 +60,26 @@ header {
   border-bottom: 4px solid #bee8a0; 
 }
 
+.form-control ,
+.form-control:focus {
+  background-color: #091004;
+  color:#589e26;
+  border-color:#bee8a0
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem #3e6e1b;
+}
+
+.form-control:disabled,
+.form-control[read-only] {
+  background-color: #3e6e1b;
+}
+
+.text-muted {
+  color: #508323 !important;
+}
+
 .card {
   background-color: #1b2f0c;
   border: 1px solid #bee8a0;

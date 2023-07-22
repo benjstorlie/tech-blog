@@ -7,10 +7,10 @@ const blogpostBodyEl = document.querySelector('#add-comment-form textarea');
 const submitButton = document.getElementById('submit-comment');
 commentForm.addEventListener("submit", addPost);
 
-const loginBtn = document.getElementById("login-btn");
-loginBtn.addEventListener("click",() =>{
-  location.href="/login";
-})
+// const loginBtn = document.getElementById("login-btn");
+// loginBtn.addEventListener("click",() =>{
+//   location.href="/login";
+// })
 
 async function addPost(event) {
   event.preventDefault();
