@@ -116,7 +116,7 @@ header {
   top: calc(var(--short-max-height) - 1rem); /* If it's any higher, it shows up on posts that aren't the max height */
   left: -1.25rem;  /* 1.25rem is the padding on .card-body*/
   width: calc(100% + 1.25rem);
-  height:1rem;
+  height:1.2rem;
   background-image: linear-gradient(rgba(0,0,0,0),#589e26);
 }
 .card-footer {
