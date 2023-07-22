@@ -48,7 +48,7 @@
   <div id="comments" class="comments-block card m-3">
     <ul class="list-group list-group-flush">
     {{#each comments as |comment|}}
-    <li class="list-group-item comment">
+    <li class="list-group-item comment" id="comment-item-{{comment.id}}">
       {{#if comment.isUserComment}}
          <button class="icon edit btn" data-commentId="{{comment.id}}" aria-label="edit comment"><img src="/images/edit.svg" alt="null"></button>
           <button class="icon delete btn" data-commentId="{{comment.id}}" aria-lable="delete comment"><img src="/images/delete.svg" alt="null"></button>
@@ -56,7 +56,7 @@
       <span class="h6 comment-user-link">{{user_link comment.user}}
         <span class="comment-date">{{format_date comment.createdAt}}</span>
         :</span>
-      <p>{{comment.body}}</p>
+      <div id="comment-{{comment.id}}" class="comment-body">{{comment.body}}</div>
     </li>
     {{/each}}
     </ul>

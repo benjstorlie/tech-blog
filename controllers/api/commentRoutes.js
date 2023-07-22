@@ -21,7 +21,7 @@ router.post('/',  async (req, res) => {
 router.put('/:id',  async (req, res) => {
   try {
     const commentId = req.params.id;
-    const comment = await Comment.findByPk(commentId);
+    const comment = await Comment.findByPk(commentId,{attributes:['userId']});
 
       if (req.session.userId !== comment.userId) {
         res
@@ -30,12 +30,10 @@ router.put('/:id',  async (req, res) => {
         return;
       }
 
-      comment.set( req.body )
-      
-      comment.save();
+      Comment.update( req.body ,{where: {id: commentId}})
       res.status(200).json("Success.");
     } catch (err) {
-      res.status(400).json(err);
+      res.status(500).json(err);
     }
   }
 );
