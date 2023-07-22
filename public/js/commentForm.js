@@ -28,7 +28,7 @@ editIcons.forEach(function(icon) {
     editCommentForm.setAttribute('data-commentId',commentId);
     editCommentForm.innerHTML = `
     <div class="form-group">
-      <label for="comment-textarea">Edit comment</label>
+      <label for="comment-textarea">Edit comment:</label>
       <textarea class="form-control" id="edit-comment-textarea" rows="3">${originalText}</textarea>
      <div class="invalid-feedback">
         Comment must not be blank
@@ -61,7 +61,7 @@ delIcons.forEach(function(icon) {
 
 async function addPost(event) {
   event.preventDefault();
-  let commentBody = blogpostBodyEl.value.trim();
+  let commentBody = commentBodyEl.value.trim();
 
   if (!commentBody) {
     commentBodyEl.classList.add("is-invalid");
@@ -99,6 +99,7 @@ async function savePost(commentBody) {
     method: 'POST',
     body: JSON.stringify({
       body: commentBody,
+      blogpostId
     }),
     headers: { 'Content-Type': 'application/json' },
   });
@@ -123,8 +124,7 @@ async function updatePost(commentBody,commentId) {
   const response = await fetch('/api/comment/'+commentId, {
     method: 'PUT',
     body: JSON.stringify({
-      body: commentBody,
-      blogpostId
+      body: commentBody
     }),
     headers: { 'Content-Type': 'application/json' },
   });

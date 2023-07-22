@@ -8,6 +8,16 @@ module.exports = {
     // Format date as at hh:mm on dd MM YYYY 
     return dayjs(dateTime).format("[at] h:mm a [on] D MMM YYYY");
   },
+  edited_at: (createDate,updateDate) => {
+    createDate = dayjs(createDate);
+    updateDate = dayjs(updateDate);
+    let edited = !createDate.isSame(updateDate);
+    if (edited) {
+      return ` (edited at ${updateDate.format("h:mm a [on] D MMM YYYY")})`
+    } else {
+      return ''
+    }
+  },
   user_link: (user) => {
     return new Handlebars.SafeString(`<a class="username" href='/user/${user.id}'>${user.username}</a>`);
   },

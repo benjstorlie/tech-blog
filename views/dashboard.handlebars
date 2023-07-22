@@ -17,7 +17,7 @@
       <div class="col">
    <span class="h3 blogpost-title d-block">{{blogpost_title_link blogpost}}</span>
     <span class="h5 card-subtitle d-block">
-       <span class="title-date">posted {{format_date blogpost.createdAt}}</span>
+       <span class="title-date">posted {{format_date blogpost.createdAt}}{{edited_at blogpost.createdAt blogpost.updatedAt}}</span>
     </span>
     {{#each blogpost.tags as |tag|}}{{tag_link tag}}{{/each}}
     </div>

@@ -54,7 +54,9 @@
           <button class="icon delete btn" data-commentId="{{comment.id}}" aria-lable="delete comment"><img src="/images/delete.svg" alt="null"></button>
       {{/if}}
       <span class="h6 comment-user-link">{{user_link comment.user}}
-        <span class="comment-date">{{format_date comment.createdAt}}</span>
+        <span class="comment-date">{{format_date comment.createdAt}}
+          {{edited_at comment.createdAt comment.updatedAt}}
+        </span>
         :</span>
       <div id="comment-{{comment.id}}" class="comment-body">{{comment.body}}</div>
     </li>
