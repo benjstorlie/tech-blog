@@ -60,10 +60,16 @@ body {
   font-size: .8em;
 }
 
-header {
+header, footer {
   color:#73cd32;
   background-color: #2c4f13;
+}
+
+header {
   border-bottom: 4px solid #bee8a0; 
+}
+footer {
+  border-top: 4px solid #bee8a0; 
 }
 
 .form-control ,

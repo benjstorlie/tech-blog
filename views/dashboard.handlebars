@@ -15,9 +15,10 @@
   <div class="card-header">
    <span class="h3 blogpost-title d-block">{{blogpost_title_link blogpost}}</span>
     <span class="h5 card-subtitle">
-       <span class="title-date">{{format_date blogpost.createdAt}}</span>
+       <span class="title-date">posted {{format_date blogpost.createdAt}}</span>
     </span>
     {{#each blogpost.tags as |tag|}}{{tag_link tag}}{{/each}}
+    
   </div>
   <div class="card-body short">
     {{blogpost.body}}
