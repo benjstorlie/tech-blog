@@ -1,7 +1,7 @@
 const newPostForm = document.getElementById('new-post-form');
 const blogpostTitleEl = document.querySelector('#new-post-form input');
 const blogpostBodyEl = document.querySelector('#new-post-form textarea');
-const submitButton = document.querySelector('.submit-btn');
+const submitButton = document.getElementById('submit-post');
 newPostForm.addEventListener("submit", addPost);
 
 
@@ -45,6 +45,7 @@ async function savePost(title,body) {
   if (response.ok && data.body && data.title && data.userId) {
     submitButton.innerText = "Posted!!";
     location.assign('/blogpost/'+data.id);
+
   } else {
   console.log(data);
     submitButton.innerText = "Failed to Post :(";
