@@ -1,9 +1,12 @@
-const newPostForm = document.getElementById('new-post-form');
-const blogpostTitleEl = document.querySelector('#new-post-form input');
-const blogpostBodyEl = document.querySelector('#new-post-form textarea');
+const editPostForm = document.getElementById('edit-post-form');
+const blogpostTitleEl = document.querySelector('#edit-post-form input');
+const blogpostBodyEl = document.querySelector('#edit-post-form textarea');
 const submitButton = document.getElementById('submit-post');
 const postStatusButton = document.getElementById('post-status');
-newPostForm.addEventListener("submit", addPost);
+
+const blogpostId = editPostForm.getAttribute('data-blogpostId');
+
+editPostForm.addEventListener("submit", addPost);
 
 
 async function addPost(event) {
@@ -35,27 +38,27 @@ async function addPost(event) {
 async function savePost(title,body) {
   submitButton.classList.add('d-none');
   postStatusButton.classList.remove('d-none');
-  const response = await fetch('/api/blogpost', {
-    method: 'POST',
+  const response = await fetch('/api/blogpost/'+blogpostId, {
+    method: 'PUT',
     body: JSON.stringify({
       title,
       body
     }),
     headers: { 'Content-Type': 'application/json' },
   })
-  const data = await response.json();
-  if (response.ok && data.body && data.title && data.userId) {
+  if (response.ok) {
     postStatusButton.innerText = "posted!!";
     location.assign('/dashboard');
 
   } else {
+    data = await response.json();
   console.log(data);
     submitButton.innerText = "Failed to Post :(";
     submitButton.classList.remove('d-none');
   postStatusButton.classList.add('d-none');
 
     blogpostBodyEl.addEventListener("input",() => {
-      submitButton.innerText = "Submit";
+      submitButton.innerText = "Update";
     }, {once: true})
   }
 

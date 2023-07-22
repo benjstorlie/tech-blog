@@ -1,17 +1,17 @@
 <div class="col-12">
   <div class="card">
     <div class="card-body">
-    <form id="new-post-form">
+    <form id="edit-post-form" data-blogpostId="{{blogpost.id}}">
       <div class="form-group">
         <label for="blogpost-title">Title:</label>
-        <input type="text" class="form-control" id="blogpost-title" value="Test Title"></input>
+        <input type="text" class="form-control" id="blogpost-title" value="{{blogpost.title}}"></input>
        <div class="invalid-feedback">
           Title must not be blank
         </div>
       </div>
       <div class="form-group">
         <label for="blogpost-body">Body</label>
-        <textarea class="form-control" id="blogpost-body" rows="5">This is test blog text.</textarea>
+        <textarea class="form-control" id="blogpost-body" rows="5">{{blogpost.body}}</textarea>
        <div class="invalid-feedback">
           Post body must not be blank.
         </div>
@@ -20,11 +20,11 @@
         <label for="select-tags">Add tags coming soon!</label>
         <select class="form-control" id="select-tags" disabled></select>
       </div>
-      <button type="submit" id="submit-post" class="btn">Submit</button>
+      <button type="submit" id="submit-post" class="btn">Update</button>
       <div id="post-status" class="btn d-none">posting....</div>
     </form>
     </div>
   </div>
 </div>
 
-    <script src="/js/newpost.js"></script>
+    <script src="/js/editpost.js"></script>

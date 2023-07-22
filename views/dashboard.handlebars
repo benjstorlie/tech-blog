@@ -23,7 +23,7 @@
     </div>
     <div class="col-sm-3 col-auto">
     <button class="icon edit btn" data-blogpostId="{{blogpost.id}}" aria-label="edit post"><img src="/images/edit.svg" alt="null"></button>
-    <button class="icon delete btn" data-blogpostId="{{blogpost.id}}"><img src="/images/delete.svg" alt="null"></button>
+    <button class="icon delete btn" data-blogpostId="{{blogpost.id}}" data-title="{{blogpost.title}}"><img src="/images/delete.svg" alt="null"></button>
     </div>
     </div>
   </div>
@@ -45,3 +45,32 @@
   </ul>
 </nav>
 </div>
+
+<script>
+  const editIcons = document.querySelectorAll('.icon.edit');
+  editIcons.forEach(function(icon) {
+    let blogpostId = icon.getAttribute('data-blogpostId');
+    icon.addEventListener("click",function(){
+      location.assign('/editpost/'+blogpostId);
+    })
+  });
+
+  const delIcons = document.querySelectorAll('.icon.delete');
+  delIcons.forEach(function(icon) {
+    let blogpostId = icon.getAttribute('data-blogpostId');
+    let title = icon.getAttribute('data-title');
+    icon.addEventListener("click", async function() {
+      if (confirm("Do you want to delete "+title+"?")) {
+        const response = await fetch(`/api/blogpost/${blogpostId}`, {
+          method: 'DELETE',
+        });
+
+        if (response.ok) {
+          location.reload();
+        } else {
+          alert('Failed to delete project');
+        }
+      }
+    });
+  });
+</script>
