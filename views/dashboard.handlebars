@@ -19,8 +19,9 @@
     </span>
     {{#each blogpost.tags as |tag|}}{{tag_link tag}}{{/each}}
   </div>
-  <div class="card-body homepage">
+  <div class="card-body short">
     {{blogpost.body}}
+    <div class="ellipsis"></div>
   </div>
   <div class="card-footer">
     <span class="comment-count">

@@ -1,3 +1,7 @@
+:root {
+  --short-max-height: 6rem;
+}
+
 a {
   color: inherit;
 }
@@ -30,10 +34,6 @@ body {
   cursor: pointer;
 }
 
-.card-body.homepage {
-  max-height: 6rem;
-  overflow:hidden
-}
 
 .comment-count {
   color: #f08080;
@@ -92,15 +92,33 @@ header {
   border: 1px solid #bee8a0;
 }
 
-.card-header+.card-body {
-  background-color: #091004;
-}
-
 .card-header {
   border-bottom: 1px solid #bee8a0;
   background-color: #233f0f;
 }
 
+.card-body {
+  padding-block: .75rem;
+}
+
+.card-header+.card-body {
+  background-color: #091004;
+}
+
+.card-body.short {
+  max-height: var(--short-max-height);
+  overflow:hidden;
+  position: relative;
+}
+
+.short>.ellipsis {
+  position: absolute;
+  top: calc(var(--short-max-height) - 1rem); /* If it's any higher, it shows up on posts that aren't the max height */
+  left: -1.25rem;  /* 1.25rem is the padding on .card-body*/
+  width: calc(100% + 1.25rem);
+  height:1rem;
+  background-image: linear-gradient(rgba(0,0,0,0),#589e26);
+}
 .card-footer {
   border-top: 1px solid #bee8a0;
   background-color: #233f0f;
