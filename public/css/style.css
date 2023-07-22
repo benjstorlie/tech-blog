@@ -61,8 +61,11 @@ header {
 }
 
 .card {
-  
+  background-color: #1b2f0c;
   border: 1px solid #bee8a0;
+}
+
+.card-header+.card-body {
   background-color: #091004;
 }
 

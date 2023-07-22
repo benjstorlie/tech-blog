@@ -16,14 +16,14 @@
   <div class="container-fluid vw-100">
     <header class="row py-3">
       <div id="header-logo" class="col-12 col-md-4">
-        <img id="logo" src="/images/tech-blog-logo.png" alt="logo">
-        <img id="logo-text" src="/images/tech-blog-logo-text.png" alt="tech blog">
+        <a href="/"><img id="logo" src="/images/tech-blog-logo.png" alt="logo"></a>
+        <a href="/"><img id="logo-text" src="/images/tech-blog-logo-text.png" alt="tech blog"></a>
       </div>
       <nav class="col-12 col-md-8">
         <!-- Conditionally render login or logout links -->
         <ul class="nav justify-content-end">
           <li class="nav-item">
-            <a class="nav-link btn" href="/">Home</a>
+            <a class="nav-link btn" href="/">Homepage</a>
           </li>
           {{#if logged_in}}
           <li class="nav-item">

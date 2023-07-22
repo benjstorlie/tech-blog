@@ -22,6 +22,7 @@
     </div>
   </div>
   <div class="comment-form-box card m-3 p-1">
+    <div class="card-body">
   {{#if logged_in}}
     <form id="add-comment-form" data-blogpostId="{{blogpost.id}}">
       <div class="form-group">
@@ -42,7 +43,7 @@
     </form>
   {{/if}}
   </div>
-
+</div>
   {{#if blogpost.commentCount}}
   <div id="comments" class="comments-block card m-3">
     <ul class="list-group list-group-flush">
