@@ -164,14 +164,14 @@ const get = {
     /**
    * Find all blogposts, with a given userId. Default is return limit 5, ordered by createdAt, descending.
    * @param {Object} options - A hash of options to describe the scope of the search
-   * @returns {Promise<{count: number|number[], rows: BlogPost[]}>}
+   * @returns {Promise<{count: number|number[], rows: Blogpost[]}>}
    */
       async findAllWithUser(userId,options={}) {
         const query = { 
           limit: 5 ,
           order:[['createdAt','DESC']] ,
+          where: {userId},
           include: [
-            { model: User, where:{ id: userId }, attributes: { exclude: ['password', 'email'] } },
             { model: Tag, through: { attributes: [] } }, // Exclude junction table attributes 
           ],
           distinct: true, 

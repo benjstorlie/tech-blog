@@ -67,25 +67,21 @@ router.get('/editpost/:id', withAuth,async (req, res) => {
 // Use withAuth middleware to prevent access to route
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
-    if (false) {
-      // Find the logged in user based on the session ID
-      const userData = await User.findByPk(req.session.userId, {
-        attributes: { exclude: ['password'] },
-        include: [{ model: Blogpost }],
-      });
+    // page will be 1-indexed, because users see it. 
+    const page = req.query.page || 1;
 
-      const user = userData.get({ plain: true });
+    const blogpostData = await blogpostGet.findAllWithUser(req.session.userId,(page > 1 ?{offset: 5*(page-1)} : {}));
 
-      res.render('profile', {
-        ...user,
-        logged_in: true
-      });
-    } else {
-      res.render('errorpage', {
-      message: "Dashboard Page Coming Soon",
-      logged_in: req.session.logged_in
-      })
-    }
+    const blogposts = blogpostData.rows.map((blogpost) => blogpost.get({ plain: true }));
+
+    const blogpostCount = blogpostData.count;
+    
+    res.render('dashboard', {
+      blogposts,
+      logged_in: true
+    });
+
+    
   } catch (err) {
     res.status(500).json(err);
   }
