@@ -110,6 +110,7 @@ router.get('/login', (req, res) => {
 
   res.render('login');
 });
+
 router.get('/newpost',withAuth, async (req, res) => {
   try {
   
