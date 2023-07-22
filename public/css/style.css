@@ -168,7 +168,7 @@ footer {
   background-color: inherit;
   height: 50px;
   width: 50px;
-  padding: 0px;
+  padding: 0px; 
 }
 
 .btn.icon:hover,

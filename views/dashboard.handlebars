@@ -12,16 +12,16 @@
   <!-- Loop over each object in the blogposts array -->
 {{#each blogposts as |blogpost| }}
 <div class="blogpost card m-3">
-  <div class="card-header container">
+  <div class="card-header container-fluid">
     <div class="row">
-      <div class="col-12 col-md">
+      <div class="col">
    <span class="h3 blogpost-title d-block">{{blogpost_title_link blogpost}}</span>
     <span class="h5 card-subtitle d-block">
        <span class="title-date">posted {{format_date blogpost.createdAt}}</span>
     </span>
     {{#each blogpost.tags as |tag|}}{{tag_link tag}}{{/each}}
     </div>
-    <div class="col-12 col-md-2">
+    <div class="col-sm-3 col-auto">
     <button class="icon edit btn" data-blogpostId="{{blogpost.id}}" aria-label="edit post"><img src="/images/edit.svg" alt="null"></button>
     <button class="icon delete btn" data-blogpostId="{{blogpost.id}}"><img src="/images/delete.svg" alt="null"></button>
     </div>
