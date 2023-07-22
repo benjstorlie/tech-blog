@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Blogpost, Comment, Tag, User } = require('../models');
 const {  blogpostGet, commentGet, tagGet } = require('./api');
 const withAuth = require('../utils/auth');
+const { literal } = require('sequelize');
 
 router.get('/', async (req, res) => {
   try {
@@ -38,7 +39,11 @@ router.get('/blogpost/:id', async (req, res) => {
   try {
     const blogpostId = req.params.id;
     const blogpostData = await blogpostGet.findByPk(blogpostId);
-    const commentData = await commentGet.findAllWithBlogpost(blogpostId);
+    const options = ( req.session.logged_in ? 
+      {
+        attributes: {include: [[literal(`user.id = ${req.session.userId}`),'isUserComment']]}
+        } : {});
+    const commentData = await commentGet.findAllWithBlogpost(blogpostId, options);
     const blogpost = blogpostData.get({ plain: true });
     const comments = commentData.rows.map((comment) => comment.get({ plain: true }));
     res.render('blogpost', {
@@ -73,6 +78,9 @@ router.get('/editpost/:id', withAuth,async (req, res) => {
 // Use withAuth middleware to prevent access to route
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
+    const userData = await User.findByPk(req.session.userId,{attributes: {exclude: ['password','email','id']}});
+    const user = userData.get({plain: true});
+
     // page will be 1-indexed, because users see it. 
     const page = req.query.page || 1;
 
@@ -83,7 +91,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     const blogpostCount = blogpostData.count;
 
     res.render('dashboard', {
-      blogposts, blogpostCount,
+      user, blogposts, blogpostCount,
       logged_in: true
     });
 

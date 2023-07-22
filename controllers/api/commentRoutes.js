@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Blogpost, Comment , User} = require('../../models');
+const { literal } = require('sequelize');
 
 router.post('/',  async (req, res) => {
   try {
@@ -80,6 +81,22 @@ router.get('/all', async (req, res) => {
 router.get('/blogpost/:id', async (req, res) => {
   try {
     const commentData = await get.findAllWithBlogpost(req.params.id);
+    if (!commentData) {
+      res.status(404).json({ message: 'No comment found with this id!' });
+      return;
+    }
+    res.status(200).json(commentData);
+  } catch(err) {
+    res.status(500).json(err);
+  }
+})
+
+router.get('/blogpost/:id/user/:userId', async (req, res) => {
+  try {
+    const options = {
+      attributes: {include: [[literal(`user.id = ${req.params.userId}`),'isUserComment']]}
+      } 
+    const commentData = await get.findAllWithBlogpost(req.params.id,options);
     if (!commentData) {
       res.status(404).json({ message: 'No comment found with this id!' });
       return;

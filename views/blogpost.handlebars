@@ -49,6 +49,10 @@
     <ul class="list-group list-group-flush">
     {{#each comments as |comment|}}
     <li class="list-group-item comment">
+      {{#if comment.isUserComment}}
+         <button class="icon edit btn" data-commentId="{{comment.id}}" aria-label="edit comment"><img src="/images/edit.svg" alt="null"></button>
+          <button class="icon delete btn" data-commentId="{{comment.id}}" aria-lable="delete comment"><img src="/images/delete.svg" alt="null"></button>
+      {{/if}}
       <span class="h6 comment-user-link">{{user_link comment.user}}
         <span class="comment-date">{{format_date comment.createdAt}}</span>
         :</span>
@@ -66,7 +70,7 @@
 {{else}}
 <script>
   const loginBtn = document.getElementById("login-btn");
-loginBtn.addEventListener("click",() =>{
+loginBtn.addEventListener("click",function() {
   location.href="/login";
 })
 </script>
