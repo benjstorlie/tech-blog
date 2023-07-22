@@ -1,13 +1,13 @@
 
 
-
-
 <div class="col-12 col-md-9">
-<nav aria-label="blogpost page navigation" class="col-12">
-  <ul class="pagination justify-content-end">
+
+<nav aria-label="blogpost page navigation" >
+  <ul class="pagination justify-content-end m-3">
     {{pagination blogpostCount page}}
   </ul>
 </nav>
+
   <!-- Loop over each object in the blogposts array -->
 {{#each blogposts as |blogpost| }}
 <div class="blogpost card m-3">
@@ -28,9 +28,9 @@
   </div>
 </div>
 {{/each}}
-<div class="col-12 col-md-9">
-<nav aria-label="blogpost page navigation" class="col-12">
-  <ul class="pagination justify-content-end">
+
+<nav aria-label="blogpost page navigation" >
+  <ul class="pagination justify-content-end m-3">
     {{pagination blogpostCount page}}
   </ul>
 </nav>
