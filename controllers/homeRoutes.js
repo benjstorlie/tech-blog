@@ -51,7 +51,7 @@ router.get('/blogpost/:id', withAuth,async (req, res) => {
 });
 
 // Use withAuth middleware to prevent access to route
-router.get('/profile', withAuth, async (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
   try {
     if (false) {
       // Find the logged in user based on the session ID
@@ -68,7 +68,7 @@ router.get('/profile', withAuth, async (req, res) => {
       });
     } else {
       res.render('errorpage', {
-      message: "Profile Page Coming Soon",
+      message: "Dashboard Page Coming Soon",
       logged_in: req.session.logged_in
       })
     }
