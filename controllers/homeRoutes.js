@@ -3,7 +3,7 @@ const { Blogpost, Comment, Tag, User } = require('../models');
 const {  blogpostGet, commentGet, tagGet } = require('./api');
 const withAuth = require('../utils/auth');
 
-router.get('/',withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     // page will be 1-indexed, because users see it. 
     const page = req.query.page || 1;
@@ -34,7 +34,7 @@ router.get('/',withAuth, async (req, res) => {
   }
 });
 
-router.get('/blogpost/:id', withAuth,async (req, res) => {
+router.get('/blogpost/:id', async (req, res) => {
   try {
     const blogpostId = req.params.id;
     const blogpostData = await blogpostGet.findByPk(blogpostId);
@@ -83,7 +83,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     const blogpostCount = blogpostData.count;
 
     res.render('dashboard', {
-      blogposts,
+      blogposts, blogpostCount,
       logged_in: true
     });
 

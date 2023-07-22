@@ -4,12 +4,11 @@ const {router: userRoutes} = require('./userRoutes');
 const {router: blogpostRoutes, get: blogpostGet} = require('./blogpostRoutes');
 const {router: commentRoutes, get: commentGet} = require('./commentRoutes');
 const {router: tagRoutes, get: tagGet} = require('./tagRoutes');
-const withAuth = require('../../utils/auth');
 
 
 
 // Get ALL blogpostTags, the through model for the many-to-many association between Tag and Blogpost
-router.get('/blogpostTag', withAuth, async (req, res) => {
+router.get('/blogpostTag', async (req, res) => {
   try {
     const blogpostTagData = await BlogpostTag.findAll();
     res.status(200).json(blogpostTagData);

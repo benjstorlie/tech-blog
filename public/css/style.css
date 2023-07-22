@@ -162,15 +162,22 @@ footer {
 }
 
 .btn.icon {
-  border-radius: .12rem ;
   border: 1px solid transparent;
   font-weight: normal;
   color: inherit;
   background-color: inherit;
+  height: 50px;
+  width: 50px;
+  padding: 0px;
 }
 
 .btn.icon:hover,
 .icon:focus {
   border-color:#73cd32;
   font-weight: normal;
+  
+}
+
+.icon>img {
+  height: 2rem;
 }
