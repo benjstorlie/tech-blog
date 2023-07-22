@@ -45,3 +45,7 @@ THEN I am signed out of the site
 WHEN I am idle on the site for more than a set time
 THEN I am able to view comments but I am prompted to log in again before I can add, update, or delete comments
 ```
+
+## My Comments
+
+1. I tried to limit the effort I put into the layout and styling, and concentrate on the actual functionality.  So there are definitely some parts that need work.  Like, the header's layout is inconsistent because all the pieces are just placed in there.
