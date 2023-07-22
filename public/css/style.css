@@ -80,7 +80,8 @@ footer {
 }
 
 .form-control:focus,
-.btn:focus {
+.btn:focus,
+.icon:focus {
   box-shadow: 0 0 0 0.2rem #3e6e1b;
 }
 
@@ -158,4 +159,18 @@ footer {
   font-weight: bold;
   background-color: #233f0f;
   color:#73cd32
+}
+
+.btn.icon {
+  border-radius: .12rem ;
+  border: 1px solid transparent;
+  font-weight: normal;
+  color: inherit;
+  background-color: inherit;
+}
+
+.btn.icon:hover,
+.icon:focus {
+  border-color:#73cd32;
+  font-weight: normal;
 }

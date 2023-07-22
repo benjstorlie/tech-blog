@@ -55,6 +55,12 @@ router.get('/editpost/:id', withAuth,async (req, res) => {
     const blogpostId = req.params.id;
     const blogpostData = await blogpostGet.findByPk(blogpostId);
     const blogpost = blogpostData.get({ plain: true });
+
+    if (blogpost.userId !== req.session.userId) {
+      res.redirect('/login');
+      return;
+    }
+
     res.render('editpost', {
       blogpost, 
       logged_in: req.session.logged_in
@@ -75,7 +81,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     const blogposts = blogpostData.rows.map((blogpost) => blogpost.get({ plain: true }));
 
     const blogpostCount = blogpostData.count;
-    
+
     res.render('dashboard', {
       blogposts,
       logged_in: true
