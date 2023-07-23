@@ -93,7 +93,7 @@ THEN I am able to view comments but I am prompted to log in again before I can a
 
 3. There's definitely a lot of repeated code in my handlebars files, and I am sure there is a much more efficient way to do it.  I'm still getting used to the handlebars system, so I focused on getting it functional first.
 
-4. The blogposts get marked as updated when you add or delete a comment, because I added a hook for comments that updates the 'commentCount' attribute of the blogpost.  So I'll have to make a special 'updatedAt' attribute that only gets updated when you update the title or body.  And while I was able to set the updatedAt date in the seeds, it doesn't work with those that are seeded with comments, for the same reason.
+4. The blogposts get marked as updated when you add or delete a comment, because I added a hook for comments that updates the 'commentCount' attribute of the blogpost.  So I'll have to make a special 'updatedAt' attribute that only gets updated when you update the title or body.  Or maybe make a one-to-one model for just the commentCount, so nothing about the blogpost instance is actually updated.  And while I was able to set the updatedAt date in the seeds, it doesn't work with those that are seeded with comments, for the same reason.
 
     * Oh no! I just saw it doesn't property re-count the comments when one is deleted!
 
