@@ -18,6 +18,13 @@ module.exports = {
       return ''
     }
   },
+  // is_selected: (tags,tagId) => {
+    
+  //       {
+  //       return 'checked';
+  //      }
+
+  // },
   user_link: (user) => {
     return new Handlebars.SafeString(`<a class="username" href='/user/${user.id}'>${user.username}</a>`);
   },

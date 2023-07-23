@@ -7,12 +7,10 @@ router.get('/all', async (req, res) => {
   try {
     const tagData = await Tag.findAll();
     res.status(200).json(tagData);
-  } catch {
+  } catch (err) {
     res.status(500).json(err);
   }
 });
-
-
 
 const get = {
   

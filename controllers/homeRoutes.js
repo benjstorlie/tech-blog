@@ -66,8 +66,14 @@ router.get('/editpost/:id', withAuth,async (req, res) => {
       return;
     }
 
+    const blogpostTags = blogpostData.tags.map((tag) => tag.id)
+
     const tagData = await Tag.findAll();
     const tags = tagData.map((tag) => tag.get({ plain: true }));
+
+    tags.forEach((tag) => {
+      tag.isBlogpostTag = (blogpostTags.includes(tag.id))
+    })
 
     res.render('editpost', {
       blogpost, tags,

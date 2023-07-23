@@ -16,20 +16,15 @@
           Post body must not be blank.
         </div>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="update-tags">
-        <label class="form-check-label" for="update-tags">
-          Update tags
-        </label>
-      </div>
-      <div class="form-group">
-        <label for="select-tags">Choose multiple tags (Feature not currently available!! Will not save!!)</label>
-        <select class="form-select" id="select-tags" size="3" multiple disabled>
-          <option selected></option>
-          {{#each tags as |tag|}}
-            <option value="{{tag.id}}">{{tag.tagName}}</option>
-          {{/each}}
-          </select>
+      <div class="form-row pl-4">
+        {{#each tags as |tag|}}
+          <div class="form-check col-4 col-md-3 col-lg-2 col-xl-1">
+          <input class="form-check-input" type="checkbox" id="tag-{{tag.id}}" data-tagId="{{tag.id}}" {{#if tag.isBlogpostTag}}checked{{/if}}>
+          <label class="form-check-label" for="tag-{{tag.id}}">
+            {{tag.tagName}}
+          </label>
+        </div>
+        {{/each}}
       </div>
       <button type="submit" id="submit-post" class="btn">Update</button>
       <div id="post-status" class="btn d-none">posting....</div>

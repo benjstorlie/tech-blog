@@ -15,6 +15,28 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.get('/:id/tags', async (req, res) => {
+  try {
+    const  blogpostId  = req.params.id;
+    const blogpost= await Blogpost.findByPk(blogpostId);
+
+    if (!blogpost) {
+      res
+        .status(404)
+        .json({ message: `No blogpost with id ${blogpostId}` });
+      return;
+    } 
+    const tags = await blogpost.getTags();
+
+    const tagIds = tags.map((tag) => tag.id);
+
+    res.status(200).json(tagIds);
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
+
 router.put('/tags', async (req, res) => {
   try {
     const { blogpostId , tagIds } = req.body;
@@ -107,6 +129,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const blogpostData = await get.findByPk(req.params.id);
+    blogpostData.tags = blogpostData.tags.map((tag) => tag.id);
     res.status(200).json(blogpostData);
   } catch (err) {
     res.status(500).json(err);
