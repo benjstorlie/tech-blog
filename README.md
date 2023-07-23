@@ -1,8 +1,7 @@
 # Tech Blog
 
-[Webpage Link](https://tech-blog-072023-2817de97af34.herokuapp.com/)
-
-[Github Repo Link](https://github.com/benjstorlie/tech-blog)
+* [Webpage Link](https://tech-blog-072023-2817de97af34.herokuapp.com/)
+* [Github Repo Link](https://github.com/benjstorlie/tech-blog)
 
 ## Table of Contents
 
