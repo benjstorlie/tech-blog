@@ -15,6 +15,15 @@
 
 ## Installation and Use
 
+[Webpage Link](https://tech-blog-072023-2817de97af34.herokuapp.com/)
+[Repo Link](https://github.com/benjstorlie/tech-blog)
+
+
+![Login and Signup](./assets/sm-Screenshot-Login-and-Signup.png)![Homepage](./assets/sm-Screenshot-homepage.png)
+![Dashboard](./assets/sm-Screenshot-dashboard.png)
+![New Post](./assets/sm-Screenshot-newpost.png)
+![Comment](./assets/sm-Screenshot-comment.png)
+![Update Comments](./assets/sm-Screenshot-update-comment.png)
 
 ## User Story
 
