@@ -66,8 +66,11 @@ router.get('/editpost/:id', withAuth,async (req, res) => {
       return;
     }
 
+    const tagData = await Tag.findAll();
+    const tags = tagData.map((tag) => tag.get({ plain: true }));
+
     res.render('editpost', {
-      blogpost, 
+      blogpost, tags,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -114,7 +117,11 @@ router.get('/login', (req, res) => {
 router.get('/newpost',withAuth, async (req, res) => {
   try {
   
+    const tagData = await Tag.findAll();
+    const tags = tagData.map((tag) => tag.get({ plain: true }));
+
   res.render('newpost', {
+    tags,
   logged_in: req.session.logged_in
   })
 

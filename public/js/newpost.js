@@ -5,6 +5,12 @@ const submitButton = document.getElementById('submit-post');
 const postStatusButton = document.getElementById('post-status');
 newPostForm.addEventListener("submit", addPost);
 
+const tagsCheck = document.getElementById("update-tags");
+const tagsSelect = document.getElementById("select-tags")
+
+tagsCheck.addEventListener("change",() => {
+
+})
 
 async function addPost(event) {
   event.preventDefault();

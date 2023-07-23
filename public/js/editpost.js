@@ -8,6 +8,16 @@ const blogpostId = editPostForm.getAttribute('data-blogpostId');
 
 editPostForm.addEventListener("submit", addPost);
 
+const tagsCheck = document.getElementById("update-tags");
+const tagsSelect = document.getElementById("select-tags");
+
+tagsCheck.addEventListener("change",() => {
+  if (tagsCheck.checked) {
+    tagsSelect.disabled = false;
+  } else {
+    tagsSelect.disabled = true;
+  }
+})
 
 async function addPost(event) {
   event.preventDefault();
