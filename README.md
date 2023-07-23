@@ -1,5 +1,21 @@
 # Tech Blog
 
+## Table of Contents
+
+1. [Description](#description)
+2. [Installation and Use](#installation-and-use)
+3. [User Story](#user-story)
+3. [Acceptance Criteria](#acceptance-criteria)
+3. [Comments / Bugs](#comments-bugs)
+3. [Credits](#credits)
+4. [License](#license)
+
+## Description
+
+
+## Installation and Use
+
+
 ## User Story
 
 ```md
@@ -46,10 +62,34 @@ WHEN I am idle on the site for more than a set time
 THEN I am able to view comments but I am prompted to log in again before I can add, update, or delete comments
 ```
 
-## My Comments
+## Comments / Bugs
 
 1. I tried to limit the effort I put into the layout and styling, and concentrate on the actual functionality.  So there are definitely some parts that need work.  Like, the header's layout is inconsistent because all the pieces are just placed in there.  And in some places the colors are inconsistent are are still using Bootstrap's colors.  But there were still things I was interested in that I worked on.  For example, I know there's some way to add an ellipsis for text that overflows the *height* of its container, but it's not as simple as the setting for text overflowing the width.  I was going to just leave it, but then I had the idea of adding a div that was absolutely positioned, just above the max height.  Though, it does show up if a post is exactly three rows tall.
 
 2. I figure that it is much more trouble to allow users to format their text posts, since you need to add in much more sanititizing and validation, etc.  Or maybe there's a plug-in for having a block interpreted as markdown.  So my example posts do have some html in them, because it seemed weird otherwise.
 
 3. There's definitely a lot of repeated code in my handlebars files, and I am sure there is a much more efficient way to do it.  I'm still getting used to the handlebars system, so I focused on getting it functional first.
+
+4. The blogposts get marked as updated when you add or delete a comment, because I added a hook for comments that updates the 'commentCount' attribute of the blogpost.  So I'll have to make a special 'updatedAt' attribute that only gets updated when you update the title or body.
+
+5. I made special 'get' objects containing functions for each model, in their 'modelRoutes' file, which were then exported to 'homeRoutes'.  This is because I was doing the same sort of database lookups in the 'api' folder as in the file that fills out the views.  I didn't want to write the function twice in two places, and I wanted to keep 'homeRoutes' just focused on what data is getting sent to the views.  It also made it much easier to test with Insomnia what data the views were receiving.
+
+## Credits
+
+1. I had some fun putting together some interesting filler text 
+
+    1. [Lorem Ipsum](https://loremipsum.io/) 
+
+    1. [Web 2.0 Ipsum](https://web20ipsum.com/)
+
+    2. [Pirate Ipsum](https://pirateipsum.me/)
+
+    4. [Cat Ipsum](https://www.catipsum.com/)
+
+    5. [Postmodernist Generator](https://www.elsewhere.org/pomo/) 
+
+2. I used [Google fonts icons](https://fonts.google.com/icons) for the delete and edit buttons. 
+
+## License 
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
