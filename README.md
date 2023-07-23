@@ -81,6 +81,8 @@ THEN I am able to view comments but I am prompted to log in again before I can a
 
 4. The blogposts get marked as updated when you add or delete a comment, because I added a hook for comments that updates the 'commentCount' attribute of the blogpost.  So I'll have to make a special 'updatedAt' attribute that only gets updated when you update the title or body.  And while I was able to set the updatedAt date in the seeds, it doesn't work with those that are seeded with comments, for the same reason.
 
+    * Oh no! I just saw it doesn't property re-count the comments when one is deleted!
+
 5. I made special 'get' objects containing functions for each model, in their 'modelRoutes' file, which were then exported to 'homeRoutes'.  This is because I was doing the same sort of database lookups in the 'api' folder as in the file that fills out the views.  I didn't want to write the function twice in two places, and I wanted to keep 'homeRoutes' just focused on what data is getting sent to the views.  It also made it much easier to test with Insomnia what data the views were receiving.
 
 6. The use of tags is still in development.  It's all set up in the model though, which is why the seed posts have tags.  Since it's a many-to-many relationship, a lot more has to be set up still to be able to get an array of tag ids for a post, and to use an array of ids to update the tags.  That will involve creating and destroying of BlogpostTag instances.  But I did want to show what it could look like, though it also would be good to be able to create a tag there, too.  And have it look like other tag suggestion boxes too.
