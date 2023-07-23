@@ -1,5 +1,9 @@
 # Tech Blog
 
+[Webpage Link](https://tech-blog-072023-2817de97af34.herokuapp.com/)
+
+[Github Repo Link](https://github.com/benjstorlie/tech-blog)
+
 ## Table of Contents
 
 1. [Description](#description)
@@ -12,18 +16,29 @@
 
 ## Description
 
+Share your thoughts and opinions about tech!  Write your own blogposts and leave your comments on others'.
 
 ## Installation and Use
 
-[Webpage Link](https://tech-blog-072023-2817de97af34.herokuapp.com/)
-[Repo Link](https://github.com/benjstorlie/tech-blog)
+Visit [the Tech Blog Heroku site](https://tech-blog-072023-2817de97af34.herokuapp.com/) to get started!
 
+You can view the homepage without an account, but [please sign up](https://tech-blog-072023-2817de97af34.herokuapp.com/login) so you can read all the posts and comments and make your own!
 
-![Login and Signup](./assets/sm-Screenshot-Login-and-Signup.png)![Homepage](./assets/sm-Screenshot-homepage.png)
-![Dashboard](./assets/sm-Screenshot-dashboard.png)
-![New Post](./assets/sm-Screenshot-newpost.png)
+![Login and Signup](./assets/sm-Screenshot-Login-and-Signup.png)
+
+From the [homepage](https://tech-blog-072023-2817de97af34.herokuapp.com/), you can view snippets of all the posts made. Use the page navigation to view more.
+
+![Homepage](./assets/sm-Screenshot-homepage.png)
+
+Add a comment to any post!  Your comments will show edit and delete buttons.
+
 ![Comment](./assets/sm-Screenshot-comment.png)
 ![Update Comments](./assets/sm-Screenshot-update-comment.png)
+
+[Create your own blogpost](https://tech-blog-072023-2817de97af34.herokuapp.com/newpost) with the new post button.  View it and all your other posts on your [dashboard](https://tech-blog-072023-2817de97af34.herokuapp.com/dashboard), where you can choose to edit or delete them.
+
+![New Post](./assets/sm-Screenshot-newpost.png)
+![Dashboard](./assets/sm-Screenshot-dashboard.png)
 
 ## User Story
 
@@ -87,9 +102,22 @@ THEN I am able to view comments but I am prompted to log in again before I can a
 
 6. The use of tags is still in development.  It's all set up in the model though, which is why the seed posts have tags.  Since it's a many-to-many relationship, a lot more has to be set up still to be able to get an array of tag ids for a post, and to use an array of ids to update the tags.  That will involve creating and destroying of BlogpostTag instances.  But I did want to show what it could look like, though it also would be good to be able to create a tag there, too.  And have it look like other tag suggestion boxes too.
 
+7. It would be nice that, when you get redirected to login, that it sends you back to the page you were redirected from.  Would that be an attribute you'd add to the session?
+
+    * I had set it up so that a user who wasn't logged in could read all the posts and comments, but just has to make an account to make any posts or comments of their own.  But then I saw that the acceptance requirements had it so that not logged in users are only allowed to see the homepage.  
+    * So I just wanted to point out that the view blogpost page does have a special appearance for those who are not logged in.  Instead of "Post My Comment", the button says "Log in to comment", and that button then sends you to the login page.
+    * I still like having the homepage showing all the posts have the posts be shortened. But it doesn't seem fair for a user without an account not get to see the whole post.  I'd like to re-do it so that clicking the post expands it.  That would just involve adding/removing some classes. And adding transition time. And doing something to adjust the scrolling -- or I could have them not collapse again, so you wouldn't be jumped around the page anyway.
+    * They still have the option to open up "inspect" and just read the articles from the html.  They're only hidden from view; the whole text is still sent from the database.
+
+8. I have "search by user" and "search by tag" in development.  I already created the Sequelize functions for those.  The search by user function is already being used for the dashboard.
+
+9. The accessiblity needs to be reviewed.  That was part of the reason for using Bootstrap as a base for the layout.  They have a lot of the accessibililty attributes included in their templates, and they will have an explanation for where to put what, based on how you're using it.  But I haven't yet gone back through the whole thing and reviewed it.
+
+10. Some of my function comments might be inaccurate, because I was copy/pasting from myself and maybe the descriptions weren't edited, too!
+
 ## Credits
 
-1. I had some fun putting together some interesting filler text 
+1. I had some fun putting together some interesting filler text for the post seeds.  Unless I made a mistake, each seed user talks using one of these filler generators.  I was sad that Corporate Ipsum and Trollem Ipsum were no longer operational, because those seemed perfect for a tech blog.
 
     1. [Lorem Ipsum](https://loremipsum.io/) 
 

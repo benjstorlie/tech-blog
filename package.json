@@ -1,7 +1,7 @@
 {
   "name": "tech-blog",
   "version": "1.0.0",
-  "description": "",
+  "description": "Share your thoughts and opinions about tech!  Write your own blogposts and leave your comments on others'.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,9 +9,13 @@
     "start": "node server.js",
     "seed": "node seeds/seed.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["blog","journal","comment","social media","blogpost","database","tech","tech news"],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:benjstorlie/tech-blog.git"
+  },
+  "author":"Ben Storlie <benjstorlie@gmail.com> (https://benjstorlie.github.io/)",
+  "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "connect-session-sequelize": "^7.1.7",
