@@ -3,19 +3,14 @@ const { Blogpost, User, Tag, Comment } = require('../../models');
 
 router.post('/', async (req, res) => {
   try {
+    const {title, body, tagIds} = req.body;
     const blogpost = await Blogpost.create({
-      title: req.body.title,
-      body: req.body.body,
+      title,
+      body,
       userId: req.session.userId,
     });
 
-    
-    const {title, body, tagIds} = req.body;
-
-    console.log(tagIds);
-
     const tags = await Tag.findAll({where: {id: tagIds}});
-
 
     if (tags.length != tagIds.length) {
       res
