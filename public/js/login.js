@@ -14,10 +14,11 @@ const loginFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      // If successful, redirect the browser to the profile page
+      // If successful, redirect the browser to the homepage
       document.location.replace('/');
     } else {
-      alert(response.statusText);
+      const data = await response.json();
+      alert(data.message);
     }
   }
 };
@@ -64,6 +65,7 @@ const signupFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/');
     } else {
+      // Right now it just says "bad request" if the unique password and email requirements are not met.
       alert(response.statusText);
     }
   }

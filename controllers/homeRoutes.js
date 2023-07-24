@@ -6,13 +6,6 @@ const { literal } = require('sequelize');
 
 
 
-// router.get('*', async (req, res) => {
-//   res.render('errorpage', {
-//     message: "404 Page not found",
-//     logged_in: req.session.logged_in
-//     })
-// })
-
 router.get('/', async (req, res) => {
   try {
     // page will be 1-indexed, because users see it. 
