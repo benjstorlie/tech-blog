@@ -163,17 +163,65 @@ router.get('/profile',withAuth, async (req, res) => {
 });
 
 router.get('/tag/:id',async (req,res) => {
-  res.render('errorpage', {
-    message: "Search posts by tag coming soon",
-    logged_in: req.session.logged_in
-    })
+  try {
+    // page will be 1-indexed, because users see it. 
+    const page = req.query.page || 1;
+    
+    // Get all projects and JOIN with user data
+    const blogpostData = await blogpostGet.findAllWithTag(req.params.id,(page > 1 ?{offset: 5*(page-1)} : {}));
+
+    const blogpostCount = blogpostData.count;
+
+    if (!blogpostData.rows.length) {
+      res.render('errorpage', { 
+        blogpostCount, page, 
+        logged_in: req.session.logged_in 
+      });
+      return;
+    }
+
+    // Serialize data so the template can read it
+    const blogposts = blogpostData.rows.map((blogpost) => blogpost.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
+    res.render('homepage', { 
+      blogposts, blogpostCount, page,
+      logged_in: req.session.logged_in 
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 })
 
 router.get('/user/:id',async (req,res) => {
-  res.render('errorpage', {
-    message: "Search posts by user coming soon",
-    logged_in: req.session.logged_in
-    })
+  try {
+    // page will be 1-indexed, because users see it. 
+    const page = req.query.page || 1;
+    
+    // Get all projects and JOIN with user data
+    const blogpostData = await blogpostGet.findAllWithUser(req.params.id,(page > 1 ?{offset: 5*(page-1)} : {}));
+
+    const blogpostCount = blogpostData.count;
+
+    if (!blogpostData.rows.length) {
+      res.render('errorpage', { 
+        blogpostCount, page, 
+        logged_in: req.session.logged_in 
+      });
+      return;
+    }
+
+    // Serialize data so the template can read it
+    const blogposts = blogpostData.rows.map((blogpost) => blogpost.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
+    res.render('homepage', { 
+      blogposts, blogpostCount, page,
+      logged_in: req.session.logged_in 
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 })
 
 module.exports = router;

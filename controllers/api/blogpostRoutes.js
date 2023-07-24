@@ -204,19 +204,21 @@ const get = {
    * @param {Object} options - A hash of options to describe the scope of the search
    * @returns {Promise<{count: number|number[], rows: Blogpost[]}>}
    */
-      async findAllWithUser(userId,options={}) {
-        const query = { 
-          limit: 5 ,
-          order:[['createdAt','DESC']] ,
-          where: {userId},
-          include: [
-            { model: Tag, through: { attributes: [] } }, // Exclude junction table attributes 
-          ],
-          distinct: true, 
-        }
-  
-        return Blogpost.findAndCountAll({...options, ...query})
-      },
+  async findAllWithUser(userId,options={}) {
+    const query = { 
+      limit: 5 ,
+      order:[['createdAt','DESC']] ,
+      where: {userId},
+      include: [
+        // This part is redundant, but it makes it easier to structure the view.
+        { model: User, attributes: { exclude: ['password', 'email'] } },
+        { model: Tag, through: { attributes: [] } }, // Exclude junction table attributes 
+      ],
+      distinct: true, 
+    }
+
+    return Blogpost.findAndCountAll({...options, ...query})
+  },
 
   /**
    * Find blogpost by primary key
