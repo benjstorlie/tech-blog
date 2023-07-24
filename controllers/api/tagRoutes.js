@@ -23,6 +23,17 @@ router.post('/', async (req,res) => {
   }
 });
 
+router.delete('/:id', async (req,res) => {
+  try {
+    await Tag.destroy({
+      where: {id: req.params.id}
+    })
+    res.status(200).json(["success"]);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 const get = {
   // complicated find functions one might want in "homeRoutes" setting up views.
 }
