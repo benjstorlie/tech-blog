@@ -8,8 +8,19 @@ const blogpostId = editPostForm.getAttribute('data-blogpostId');
 
 editPostForm.addEventListener("submit", addPost);
 
-const tagChecks = document.getElementsByClassName("form-check-input");
+const tagList = document.getElementById("tag-list")
+const tagChecks = document.querySelectorAll(".form-check-input");
 
+tagChecks.forEach((tagEl) => {
+    let tagId = tagEl.getAttribute('data-tagId');
+  tagEl.addEventListener("change",() => {
+    if (tagEl.checked) {
+      document.getElementById("badge-"+tagId).classList.remove("d-none");
+    } else {
+      document.getElementById("badge-"+tagId).classList.add("d-none");
+    }
+  })
+});
 
 async function addPost(event) {
   event.preventDefault();
@@ -33,11 +44,20 @@ async function addPost(event) {
     return;
 
   } else {
-    await savePost(blogpostTitle,blogpostBody);
+
+    let tagIds = [];
+    tagChecks.forEach((tagEl) => {
+      let tagId = tagEl.getAttribute('data-tagId');
+      if (tagEl.checked) {
+        tagIds.push(tagId);
+      }
+    })
+
+    await savePost(blogpostTitle,blogpostBody,tagIds);
   }
 }
 
-async function savePost(title,body) {
+async function savePost(title,body,tagIds) {
   submitButton.classList.add('d-none');
   postStatusButton.classList.remove('d-none');
   const response = await fetch('/api/blogpost/'+blogpostId, {
@@ -49,19 +69,40 @@ async function savePost(title,body) {
     headers: { 'Content-Type': 'application/json' },
   })
   if (response.ok) {
-    postStatusButton.innerText = "posted!!";
-    location.assign('/dashboard');
+    const tagResponse = await fetch('/api/blogpost/tags/'+blogpostId, {
+      method: 'PUT',
+      body: JSON.stringify({
+        tagIds
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+    if (tagResponse.ok) {
+      success();
+    } else {
+      let data = await tagResponse.json();
+  console.log(data);
+   failedToPost();
+    }
 
   } else {
-    data = await response.json();
+    let data = await response.json();
   console.log(data);
-    submitButton.innerText = "Failed to Post :(";
-    submitButton.classList.remove('d-none');
-  postStatusButton.classList.add('d-none');
-
-    blogpostBodyEl.addEventListener("input",() => {
-      submitButton.innerText = "Update";
-    }, {once: true})
+   failedToPost();
   }
 
+}
+
+function success() {
+  postStatusButton.innerText = "posted!!";
+    location.assign('/dashboard');
+}
+
+function failedToPost() {
+  submitButton.innerText = "Failed to Post :(";
+  submitButton.classList.remove('d-none');
+postStatusButton.classList.add('d-none');
+
+  blogpostBodyEl.addEventListener("input",() => {
+    submitButton.innerText = "Update";
+  }, {once: true})
 }

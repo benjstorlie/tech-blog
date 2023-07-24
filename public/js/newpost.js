@@ -5,12 +5,19 @@ const submitButton = document.getElementById('submit-post');
 const postStatusButton = document.getElementById('post-status');
 newPostForm.addEventListener("submit", addPost);
 
-const tagsCheck = document.getElementById("update-tags");
-const tagsSelect = document.getElementById("select-tags")
+const tagList = document.getElementById("tag-list")
+const tagChecks = document.querySelectorAll(".form-check-input");
 
-tagsCheck.addEventListener("change",() => {
-
-})
+tagChecks.forEach((tagEl) => {
+    let tagId = tagEl.getAttribute('data-tagId');
+  tagEl.addEventListener("change",() => {
+    if (tagEl.checked) {
+      document.getElementById("badge-"+tagId).classList.remove("d-none");
+    } else {
+      document.getElementById("badge-"+tagId).classList.add("d-none");
+    }
+  })
+});
 
 async function addPost(event) {
   event.preventDefault();
@@ -34,18 +41,28 @@ async function addPost(event) {
     return;
 
   } else {
-    await savePost(blogpostTitle,blogpostBody);
+
+    let tagIds = [];
+    tagChecks.forEach((tagEl) => {
+      let tagId = tagEl.getAttribute('data-tagId');
+      if (tagEl.checked) {
+        tagIds.push(tagId);
+      }
+    })
+
+    await savePost(blogpostTitle,blogpostBody,tagIds);
   }
 }
 
-async function savePost(title,body) {
+async function savePost(title,body,tagIds) {
   submitButton.classList.add('d-none');
   postStatusButton.classList.remove('d-none');
   const response = await fetch('/api/blogpost', {
     method: 'POST',
     body: JSON.stringify({
       title,
-      body
+      body,
+      tagIds
     }),
     headers: { 'Content-Type': 'application/json' },
   })
