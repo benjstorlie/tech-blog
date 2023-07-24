@@ -4,7 +4,7 @@
     <div class="card-header">
       <span class="h3 blogpost-title d-block">{{blogpost_title_link blogpost}}</span>
     <span class="h5 card-subtitle">by {{user_link blogpost.user}}
-      <span class="title-date">{{format_date blogpost.createdAt}}</span>
+      <span class="title-date">{{format_date blogpost.createdAt}}{{edited_at blogpost.createdAt blogpost.updatedAt}}</span>
     </span>
     {{#each blogpost.tags as |tag|}}{{tag_link tag}}{{/each}}
   </div>
