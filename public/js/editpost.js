@@ -6,10 +6,14 @@ const postStatusButton = document.getElementById('post-status');
 
 const blogpostId = editPostForm.getAttribute('data-blogpostId');
 
-editPostForm.addEventListener("submit", addPost);
+editPostForm.addEventListener("submit",(event) => {
+  event.preventDefault
+});
+
+submitButton.addEventListener("click", addPost);
 
 const tagList = document.getElementById("tag-list")
-const tagChecks = document.querySelectorAll(".form-check-input");
+const tagChecks = document.querySelectorAll(".tag-check");
 
 tagChecks.forEach((tagEl) => {
     let tagId = tagEl.getAttribute('data-tagId');
