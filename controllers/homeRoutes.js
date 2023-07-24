@@ -4,6 +4,13 @@ const {  blogpostGet, commentGet, tagGet } = require('./api');
 const withAuth = require('../utils/auth');
 const { literal } = require('sequelize');
 
+router.get('*', async (req, res) => {
+  res.render('errorpage', {
+    message: "404 Page not found",
+    logged_in: req.session.logged_in
+    })
+})
+
 router.get('/', async (req, res) => {
   try {
     // page will be 1-indexed, because users see it. 
@@ -15,7 +22,7 @@ router.get('/', async (req, res) => {
     const blogpostCount = blogpostData.count;
 
     if (!blogpostData.rows.length) {
-      res.render('errorpage', { 
+      res.render('noposts', { 
         blogpostCount, page, 
         logged_in: req.session.logged_in 
       });
@@ -101,14 +108,22 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
     const blogpostData = await blogpostGet.findAllWithUser(req.session.userId,(page > 1 ?{offset: 5*(page-1)} : {}));
 
+    const blogpostCount = blogpostData.count;
+
+    if (!blogpostData.rows.length) {
+      res.render('noposts', { 
+        blogpostCount, page, 
+        logged_in: req.session.logged_in 
+      });
+      return;
+    }
+
     const blogposts = blogpostData.rows.map((blogpost) => blogpost.get({ plain: true }));
 
     // count the comments for each post
     blogposts.forEach((blogpost) => {
       blogpost.commentCount = blogpost.comments.length;
     })
-
-    const blogpostCount = blogpostData.count;
 
     res.render('dashboard', {
       user, blogposts, blogpostCount,
@@ -184,7 +199,7 @@ router.get('/tag/:id',async (req,res) => {
     const blogpostCount = blogpostData.count;
 
     if (!blogpostData.rows.length) {
-      res.render('errorpage', { 
+      res.render('noposts', { 
         blogpostCount, page, 
         logged_in: req.session.logged_in 
       });
@@ -218,7 +233,7 @@ router.get('/user/:id',async (req,res) => {
     const blogpostCount = blogpostData.count;
 
     if (!blogpostData.rows.length) {
-      res.render('errorpage', { 
+      res.render('noposts', { 
         blogpostCount, page, 
         logged_in: req.session.logged_in 
       });
