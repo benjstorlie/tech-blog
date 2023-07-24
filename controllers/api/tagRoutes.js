@@ -12,8 +12,19 @@ router.get('/all', async (req, res) => {
   }
 });
 
+router.post('/', async (req,res) => {
+  try {
+    const tag = await Tag.create({
+      tagName: req.body.tagName
+    })
+    res.status(200).json(tag);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 const get = {
-  
+  // complicated find functions one might want in "homeRoutes" setting up views.
 }
 
 module.exports = {router , get};
