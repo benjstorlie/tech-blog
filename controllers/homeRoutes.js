@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
     // count the comments for each post
     blogposts.forEach((blogpost) => {
       blogpost.commentCount = blogpost.comments.length;
-    })
+    });
 
     // Pass serialized data and session flag into template
     res.render('homepage', { 
