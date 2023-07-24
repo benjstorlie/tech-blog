@@ -109,7 +109,8 @@ THEN I am able to view comments but I am prompted to log in again before I can a
     * I still like having the homepage showing all the posts have the posts be shortened. But it doesn't seem fair for a user without an account not get to see the whole post.  I'd like to re-do it so that clicking the post expands it.  That would just involve adding/removing some classes. And adding transition time. And doing something to adjust the scrolling -- or I could have them not collapse again, so you wouldn't be jumped around the page anyway.
     * They still have the option to open up "inspect" and just read the articles from the html.  They're only hidden from view; the whole text is still sent from the database.
 
-8. I have "search by user" and "search by tag" in development.  I already created the Sequelize functions for those.  The search by user function is already being used for the dashboard.
+8. Both "search by user" and "search by tag" are implemented as of the evening of 7/23/23.  It would be nice to have the url show the name instead of the id, but then I'd need to implement validation for having unique names.
+    >I have "search by user" and "search by tag" in development.  I already created the Sequelize functions for those.  The search by user function is already being used for the dashboard.
 
 9. The accessiblity needs to be reviewed.  That was part of the reason for using Bootstrap as a base for the layout.  They have a lot of the accessibililty attributes included in their templates, and they will have an explanation for where to put what, based on how you're using it.  But I haven't yet gone back through the whole thing and reviewed it.
 
