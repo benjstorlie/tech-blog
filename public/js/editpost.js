@@ -6,18 +6,31 @@ const postStatusButton = document.getElementById('post-status');
 
 const blogpostId = editPostForm.getAttribute('data-blogpostId');
 
-editPostForm.addEventListener("submit", addPost);
+const newTagEl = document.getElementById("new-tag");
+const newTagCol = document.getElementById("new-tag-col");
+const tagsRow = document.getElementById("tags-row"); 
 
-const tagsCheck = document.getElementById("update-tags");
-const tagsSelect = document.getElementById("select-tags");
+submitButton.addEventListener("click", addPost);
 
-tagsCheck.addEventListener("change",() => {
-  if (tagsCheck.checked) {
-    tagsSelect.disabled = false;
-  } else {
-    tagsSelect.disabled = true;
+blogpostTitleEl.addEventListener("keydown",(event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
   }
 })
+
+const tagList = document.getElementById("tag-list")
+const tagChecks = document.querySelectorAll(".tag-check");
+
+tagChecks.forEach((tagEl) => {
+    let tagId = tagEl.getAttribute('data-tagId');
+  tagEl.addEventListener("change",() => {
+    if (tagEl.checked) {
+      document.getElementById("badge-"+tagId).classList.remove("d-none");
+    } else {
+      document.getElementById("badge-"+tagId).classList.add("d-none");
+    }
+  })
+});
 
 async function addPost(event) {
   event.preventDefault();
@@ -41,11 +54,20 @@ async function addPost(event) {
     return;
 
   } else {
-    await savePost(blogpostTitle,blogpostBody);
+
+    let tagIds = [];
+    document.querySelectorAll('.tag-check').forEach((tagEl) => {
+      let tagId = tagEl.getAttribute('data-tagId');
+      if (tagEl.checked) {
+        tagIds.push(tagId);
+      }
+    })
+
+    await savePost(blogpostTitle,blogpostBody,tagIds);
   }
 }
 
-async function savePost(title,body) {
+async function savePost(title,body,tagIds) {
   submitButton.classList.add('d-none');
   postStatusButton.classList.remove('d-none');
   const response = await fetch('/api/blogpost/'+blogpostId, {
@@ -57,19 +79,99 @@ async function savePost(title,body) {
     headers: { 'Content-Type': 'application/json' },
   })
   if (response.ok) {
-    postStatusButton.innerText = "posted!!";
-    location.assign('/dashboard');
+    const tagResponse = await fetch('/api/blogpost/tags/'+blogpostId, {
+      method: 'PUT',
+      body: JSON.stringify({
+        tagIds
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+    if (tagResponse.ok) {
+      success();
+    } else {
+      let data = await tagResponse.json();
+  console.log(data);
+   failedToPost();
+    }
 
   } else {
-    data = await response.json();
+    let data = await response.json();
   console.log(data);
-    submitButton.innerText = "Failed to Post :(";
-    submitButton.classList.remove('d-none');
-  postStatusButton.classList.add('d-none');
-
-    blogpostBodyEl.addEventListener("input",() => {
-      submitButton.innerText = "Update";
-    }, {once: true})
+   failedToPost();
   }
 
 }
+
+function success() {
+  postStatusButton.innerText = "posted!!";
+    location.assign('/dashboard');
+}
+
+function failedToPost() {
+  submitButton.innerText = "Failed to Post :(";
+  submitButton.classList.remove('d-none');
+postStatusButton.classList.add('d-none');
+
+  blogpostBodyEl.addEventListener("input",() => {
+    submitButton.innerText = "Update";
+  }, {once: true})
+}
+
+
+
+const colors = ["primary","success","danger","info"];
+
+newTagEl.addEventListener("keydown", async (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+
+    const tagName = newTagEl.value.trim();
+    const response = await fetch('/api/tag', {
+      method: 'POST',
+      body: JSON.stringify({
+        tagName
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      newTagEl.value = "";
+      console.log(data);
+      let tagId = data.id;
+      let tagColor = colors[tagId % 4];
+      let tagCheck = document.createElement("div");
+      tagCheck.classList.add("col-auto");
+      tagCheck.innerHTML = `
+      <div class="form-check">
+        <input class="form-check-input tag-check" type="checkbox" id="tag-${tagId}" data-tagId="${tagId}" checked>
+        <label class="form-check-label" for="tag-${tagId}">
+          ${tagName}
+        </label>
+      </div>`
+
+      
+
+      let tagBadge = document.createElement("span");
+      tagBadge.classList.add("badge");
+      tagBadge.classList.add("badge-pill");
+      tagBadge.classList.add("badge-"+tagColor);
+      tagBadge.innerText = tagName;
+      tagBadge.setAttribute("id","badge-"+tagId);
+
+      tagsRow.insertBefore(tagCheck,newTagCol);
+      tagList.append(tagBadge);
+
+      document.getElementById("tag-"+tagId).addEventListener("change",(event) => {
+    if (event.target.checked) {
+      document.getElementById("badge-"+tagId).classList.remove("d-none");
+    } else {
+      document.getElementById("badge-"+tagId).classList.add("d-none");
+    }
+  });
+
+    } else {
+      console.log(data);
+    }
+  }
+});

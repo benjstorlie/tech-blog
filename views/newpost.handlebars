@@ -17,14 +17,30 @@
           Post body must not be blank.
         </div>
       </div>
-      <div class="form-group">
-         <label for="select-tags">Choose multiple tags (Feature not currently available!!  Will not save!!)</label>
-        <select class="form-select" id="select-tags" aria-label="select multiple tags" size="5" multiple>
-          <option selected></option>
+      <div class="form-row" id="tags-row">
+        <div class="col-12"  id="tag-list">
           {{#each tags as |tag|}}
-            <option value="{{tag.id}}">{{tag.tagName}}</option>
+          <span id="badge-{{tag.id}}" class="d-none badge badge-pill badge-{{tag_color tag.id}}">{{tag.tagName}}</span>
           {{/each}}
-          </select>
+        </div>
+        {{#each tags as |tag|}}
+        <div class="col-auto">
+          <div class="form-check">
+            <input class="form-check-input tag-check" type="checkbox" id="tag-{{tag.id}}" data-tagId="{{tag.id}}">
+            <label class="form-check-label" for="tag-{{tag.id}}">
+              {{tag.tagName}}
+            </label>
+          </div>
+        </div>
+        {{/each}}
+        <div class="col-auto" id="new-tag-col">
+          <div class="form-check my-2">
+            <input class="form-check-input" type="checkbox" name="new tag checkbox">
+            <span class="form-check-label">
+              <input type="text" name="new tag" id="new-tag" class="form-control" aria-label="add new tag" placeholder="new tag">
+            </span>
+          </div>
+        </div>        
       </div>
       <button type="submit" id="submit-post" class="btn">Submit</button>
       <div id="post-status" class="btn d-none">posting....</div>

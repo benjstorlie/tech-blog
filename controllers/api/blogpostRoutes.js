@@ -3,21 +3,57 @@ const { Blogpost, User, Tag, Comment } = require('../../models');
 
 router.post('/', async (req, res) => {
   try {
-    const newBlogpost = await Blogpost.create({
-      ...req.body,
+    const {title, body, tagIds} = req.body;
+    const blogpost = await Blogpost.create({
+      title,
+      body,
       userId: req.session.userId,
     });
 
+    const tags = await Tag.findAll({where: {id: tagIds}});
 
-    res.status(200).json(newBlogpost);
+    if (tags.length != tagIds.length) {
+      res
+        .status(404)
+        .json({ message: `Some tag ids were not found.` });
+      return;
+    }
+
+    await blogpost.setTags(tags);
+    await blogpost.save()
+
+    res.status(200).json(blogpost);
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
 });
 
-router.put('/tags', async (req, res) => {
+router.get('/:id/tags', async (req, res) => {
   try {
-    const { blogpostId , tagIds } = req.body;
+    const  blogpostId  = req.params.id;
+    const blogpost= await Blogpost.findByPk(blogpostId);
+
+    if (!blogpost) {
+      res
+        .status(404)
+        .json({ message: `No blogpost with id ${blogpostId}` });
+      return;
+    } 
+    const tags = await blogpost.getTags();
+
+    const tagIds = tags.map((tag) => tag.id);
+
+    res.status(200).json(tagIds);
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
+
+router.put('/tags/:id', async (req, res) => {
+  try {
+    const blogpostId  = req.params.id;
+    const { tagIds } = req.body;
     const blogpost= await Blogpost.findByPk(blogpostId);
 
     if (!blogpost) {
@@ -36,7 +72,8 @@ router.put('/tags', async (req, res) => {
     }
 
     await blogpost.setTags(tags);
-    blogpost = await blogpost.reload()
+    await blogpost.save();
+    
     res.status(200).json(blogpost);
 
   } catch (err) {
@@ -56,7 +93,7 @@ router.put('/:id',  async (req, res) => {
       return;
     }
 
-    Blogpost.update( req.body , {where: {id: blogpostId}});
+    await Blogpost.update( req.body , {where: {id: blogpostId}});
 
     res.status(200).json("Success.");
   } catch (err) {
@@ -107,6 +144,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const blogpostData = await get.findByPk(req.params.id);
+    blogpostData.tags = blogpostData.tags.map((tag) => tag.id);
     res.status(200).json(blogpostData);
   } catch (err) {
     res.status(500).json(err);

@@ -18,12 +18,22 @@ module.exports = {
       return ''
     }
   },
+  // is_selected: (tags,tagId) => {
+    
+  //       {
+  //       return 'checked';
+  //      }
+
+  // },
   user_link: (user) => {
     return new Handlebars.SafeString(`<a class="username" href='/user/${user.id}'>${user.username}</a>`);
   },
   tag_link: (tag) => {
     const color = colors[tag.id % 4];
     return new Handlebars.SafeString(`<a href='/tag/${tag.id}' class='badge badge-pill badge-${color}'>${tag.tagName}</a> `);
+  },
+  tag_color: (tagId) => {
+    return colors[tagId % 4];
   },
   blogpost_title_link: (blogpost) => {
     return new Handlebars.SafeString(`<a class="blogpost-title-link" href="/blogpost/${blogpost.id}">${blogpost.title}</a>`);
