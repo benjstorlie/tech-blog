@@ -93,9 +93,16 @@ THEN I am able to view comments but I am prompted to log in again before I can a
 
 3. There's definitely a lot of repeated code in my handlebars files, and I am sure there is a much more efficient way to do it.  I'm still getting used to the handlebars system, so I focused on getting it functional first.
 
-4. The blogposts get marked as updated when you add or delete a comment, because I added a hook for comments that updates the 'commentCount' attribute of the blogpost.  So I'll have to make a special 'updatedAt' attribute that only gets updated when you update the title or body.  Or maybe make a one-to-one model for just the commentCount, so nothing about the blogpost instance is actually updated.  And while I was able to set the updatedAt date in the seeds, it doesn't work with those that are seeded with comments, for the same reason.
+4. (As of midnight 7/23/23)  Well, the answer was simpler than I thought it was.  I really wanted to do it all with Sequelize, and at least it gave me an excuse to do a lot of research.  But I just included comments when doing a query for all the posts, and then just did a for-loop.  I didn't even need to change my handlebars files. 
+    ```
+    blogposts.forEach((blogpost) => {
+        blogpost.commentCount = blogpost.comments.length; 
+    });
+    ```
 
-    * Oh no! I just saw it doesn't property re-count the comments when one is deleted!
+    >The blogposts get marked as updated when you add or delete a comment, because I added a hook for comments that updates the 'commentCount' attribute of the blogpost.  So I'll have to make a special 'updatedAt' attribute that only gets updated when you update the title or body.  Or maybe make a one-to-one model for just the commentCount, so nothing about the blogpost instance is actually updated.  And while I was able to set the updatedAt date in the seeds, it doesn't work with those that are seeded with comments, for the same reason.
+    >
+    >* Oh no! I just saw it doesn't property re-count the comments when one is deleted!
 
 5. I made special 'get' objects containing functions for each model, in their 'modelRoutes' file, which were then exported to 'homeRoutes'.  This is because I was doing the same sort of database lookups in the 'api' folder as in the file that fills out the views.  I didn't want to write the function twice in two places, and I wanted to keep 'homeRoutes' just focused on what data is getting sent to the views.  It also made it much easier to test with Insomnia what data the views were receiving.
 
