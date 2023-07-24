@@ -137,7 +137,6 @@ newTagEl.addEventListener("keydown", async (event) => {
       tagBadge.classList.add("badge-"+tagColor);
       tagBadge.innerText = tagName;
       tagBadge.setAttribute("id","badge-"+tagId);
-      tagBadge.setAttribute('data-badge')
 
       tagsRow.insertBefore(tagCheck,newTagCol);
       tagList.append(tagBadge);
