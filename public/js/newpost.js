@@ -56,7 +56,7 @@ async function addPost(event) {
   } else {
 
     let tagIds = [];
-    tagChecks.forEach((tagEl) => {
+    document.querySelectorAll('.tag-check').forEach((tagEl) => {
       let tagId = tagEl.getAttribute('data-tagId');
       if (tagEl.checked) {
         tagIds.push(tagId);
@@ -137,6 +137,7 @@ newTagEl.addEventListener("keydown", async (event) => {
       tagBadge.classList.add("badge-"+tagColor);
       tagBadge.innerText = tagName;
       tagBadge.setAttribute("id","badge-"+tagId);
+      tagBadge.setAttribute('data-badge')
 
       tagsRow.insertBefore(tagCheck,newTagCol);
       tagList.append(tagBadge);
