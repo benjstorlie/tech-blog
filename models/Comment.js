@@ -38,26 +38,26 @@ Comment.init(
     freezeTableName: true,
     underscored: true,
     modelName: 'comment',
-    hooks: {
-      afterCreate: async (comment, options) => {
-        await Blogpost.increment({commentCount: 1}, {where: {id: comment.blogpostId}});
-      },
-      afterDestroy: async (comment, options) => {
-        await Blogpost.decrement({commentCount: 1}, {where: {id: comment.blogpostId}});
-      },
-      afterBulkCreate: async (comments, options) => {
-        // Group comments by blogpostId and count them using Sequelize's aggregate function
-        const commentCounts = await Comment.findAll({
-          attributes: ['blogpostId', [fn('COUNT', col('id')), 'count']],
-          group: ['blogpostId'],
-          raw: true,
-        });
-        for (const countData of commentCounts) {
-          const { blogpostId, count } = countData;
-          await Blogpost.update({ commentCount: count }, { where: { id: blogpostId } });
-        }
-      }
-    }
+    // hooks: {
+    //   afterCreate: async (comment, options) => {
+    //     await Blogpost.increment({commentCount: 1}, {where: {id: comment.blogpostId}});
+    //   },
+    //   afterDestroy: async (comment, options) => {
+    //     await Blogpost.decrement({commentCount: 1}, {where: {id: comment.blogpostId}});
+    //   },
+    //   afterBulkCreate: async (comments, options) => {
+    //     // Group comments by blogpostId and count them using Sequelize's aggregate function
+    //     const commentCounts = await Comment.findAll({
+    //       attributes: ['blogpostId', [fn('COUNT', col('id')), 'count']],
+    //       group: ['blogpostId'],
+    //       raw: true,
+    //     });
+    //     for (const countData of commentCounts) {
+    //       const { blogpostId, count } = countData;
+    //       await Blogpost.update({ commentCount: count }, { where: { id: blogpostId } });
+    //     }
+    //   }
+    // }
   }
 );
 

@@ -18,11 +18,11 @@ Blogpost.init(
     body: {
       type: DataTypes.TEXT,
     },
-    commentCount: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0 
-    },
+    // commentCount: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   defaultValue: 0 
+    // },
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,

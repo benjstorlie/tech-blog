@@ -173,6 +173,7 @@ const get = {
       include: [
         { model: User, attributes: { exclude: ['password', 'email'] } },
         { model: Tag, through: { attributes: [] } }, // Exclude junction table attributes 
+        { model: Comment, attributes: ['id']}
       ],
       distinct: true, 
     }
@@ -192,6 +193,7 @@ const get = {
         include: [
           { model: User, attributes: { exclude: ['password', 'email'] } },
           { model: Tag, where: { id: tagId}, through: { attributes: [] } }, // Exclude junction table attributes 
+          { model: Comment, attributes: ['id']}
         ],
         distinct: true, 
       }
@@ -213,6 +215,7 @@ const get = {
         // This part is redundant, but it makes it easier to structure the view.
         { model: User, attributes: { exclude: ['password', 'email'] } },
         { model: Tag, through: { attributes: [] } }, // Exclude junction table attributes 
+        { model: Comment, attributes: ['id']}
       ],
       distinct: true, 
     }
