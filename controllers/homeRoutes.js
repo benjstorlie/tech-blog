@@ -25,6 +25,11 @@ router.get('/', async (req, res) => {
     // Serialize data so the template can read it
     const blogposts = blogpostData.rows.map((blogpost) => blogpost.get({ plain: true }));
 
+    // count the comments for each post
+    blogposts.forEach((blogpost) => {
+      blogpost.commentCount = blogpost.comments.length;
+    })
+
     // Pass serialized data and session flag into template
     res.render('homepage', { 
       blogposts, blogpostCount, page,
@@ -45,6 +50,7 @@ router.get('/blogpost/:id',withAuth, async (req, res) => {
         } : {});
     const commentData = await commentGet.findAllWithBlogpost(blogpostId, options);
     const blogpost = blogpostData.get({ plain: true });
+    blogpost.commentCount = commentData.count;
     const comments = commentData.rows.map((comment) => comment.get({ plain: true }));
     res.render('blogpost', {
       blogpost, comments,
@@ -96,6 +102,11 @@ router.get('/dashboard', withAuth, async (req, res) => {
     const blogpostData = await blogpostGet.findAllWithUser(req.session.userId,(page > 1 ?{offset: 5*(page-1)} : {}));
 
     const blogposts = blogpostData.rows.map((blogpost) => blogpost.get({ plain: true }));
+
+    // count the comments for each post
+    blogposts.forEach((blogpost) => {
+      blogpost.commentCount = blogpost.comments.length;
+    })
 
     const blogpostCount = blogpostData.count;
 
@@ -182,7 +193,10 @@ router.get('/tag/:id',async (req,res) => {
 
     // Serialize data so the template can read it
     const blogposts = blogpostData.rows.map((blogpost) => blogpost.get({ plain: true }));
-
+    // count the comments for each post
+    blogposts.forEach((blogpost) => {
+      blogpost.commentCount = blogpost.comments.length;
+    })
     // Pass serialized data and session flag into template
     res.render('homepage', { 
       blogposts, blogpostCount, page,
@@ -213,7 +227,10 @@ router.get('/user/:id',async (req,res) => {
 
     // Serialize data so the template can read it
     const blogposts = blogpostData.rows.map((blogpost) => blogpost.get({ plain: true }));
-
+    // count the comments for each post
+    blogposts.forEach((blogpost) => {
+      blogpost.commentCount = blogpost.comments.length;
+    })
     // Pass serialized data and session flag into template
     res.render('homepage', { 
       blogposts, blogpostCount, page,
