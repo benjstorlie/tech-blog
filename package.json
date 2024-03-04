@@ -9,15 +9,25 @@
     "start": "node server.js",
     "seed": "node seeds/seed.js"
   },
-  "keywords": ["blog","journal","comment","social media","blogpost","database","tech","tech news"],
+  "keywords": [
+    "blog",
+    "journal",
+    "comment",
+    "social media",
+    "blogpost",
+    "database",
+    "tech",
+    "tech news"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:benjstorlie/tech-blog.git"
   },
-  "author":"Ben Storlie <benjstorlie@gmail.com> (https://benjstorlie.github.io/)",
+  "author": "Ben Storlie <benjstorlie@gmail.com> (https://benjstorlie.github.io/)",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "bootstrap": "^5.3.1",
     "connect-session-sequelize": "^7.1.7",
     "dayjs": "^1.11.9",
     "dotenv": "^8.2.0",
