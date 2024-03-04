@@ -23,21 +23,21 @@ Visit [the Tech Blog Heroku site](https://tech-blog-072023-2817de97af34.herokuap
 
 You can view the homepage without an account, but [please sign up](https://tech-blog-072023-2817de97af34.herokuapp.com/login) so you can read all the posts and comments and make your own!
 
-![Login and Signup](./assets/sm-Screenshot-Login-and-Signup.png)
+![Login and Signup](./assets/Sm-Screenshot-Login-and-Signup.png)
 
 From the [homepage](https://tech-blog-072023-2817de97af34.herokuapp.com/), you can view snippets of all the posts made. Use the page navigation to view more.
 
-![Homepage](./assets/sm-Screenshot-homepage.png)
+![Homepage](./assets/Sm-Screenshot-homepage.png)
 
 Add a comment to any post!  Your comments will show edit and delete buttons.
 
-![Comment](./assets/sm-Screenshot-comment.png)
-![Update Comments](./assets/sm-Screenshot-update-comment.png)
+![Comment](./assets/Sm-Screenshot-comment.png)
+![Update Comments](./assets/Sm-Screenshot-update-comment.png)
 
 [Create your own blogpost](https://tech-blog-072023-2817de97af34.herokuapp.com/newpost) with the new post button.  View it and all your other posts on your [dashboard](https://tech-blog-072023-2817de97af34.herokuapp.com/dashboard), where you can choose to edit or delete them.
 
-![New Post](./assets/sm-Screenshot-newpost.png)
-![Dashboard](./assets/sm-Screenshot-dashboard.png)
+![New Post](./assets/Sm-Screenshot-newpost.png)
+![Dashboard](./assets/Sm-Screenshot-dashboard.png)
 
 ## User Story
 
