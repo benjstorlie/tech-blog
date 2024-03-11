@@ -15,7 +15,9 @@
 
 ## Description
 
-Share your thoughts and opinions about tech!  Write your own blogposts and leave your comments on others'.
+Share your thoughts and opinions about tech!  Write your own blogposts and leave your comments on others'. This is a mockup of a blog website, using Sequelize as the ORM, the express-session npm package for authentication, and using Handlebars.js as the templating language. The live site is deployed to Heroku.
+
+This was a homework assignment for Coding Bootcamp for the week focused on the MVC (Model-View-Controller) paradigm.
 
 ## Installation and Use
 
